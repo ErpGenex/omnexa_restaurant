@@ -1,0 +1,22 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:KPJ-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["kitchen_ticket", "kitchen_printer", "status", "payload", "printed_on", "company", "branch"],
+ "fields": [
+  {"fieldname": "kitchen_ticket", "fieldtype": "Link", "label": "Kitchen Ticket", "options": "Kitchen Ticket", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "kitchen_printer", "fieldtype": "Link", "label": "Kitchen Printer", "options": "Kitchen Printer", "in_list_view": 1},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Queued\nPrinted\nFailed", "default": "Queued", "in_list_view": 1},
+  {"fieldname": "payload", "fieldtype": "Code", "label": "Payload", "options": "Text"},
+  {"fieldname": "printed_on", "fieldtype": "Datetime", "label": "Printed On"},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Restaurant",
+ "name": "Kitchen Print Job",
+ "permissions": [{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "print": 1, "email": 1, "export": 1, "report": 1, "share": 1}],
+ "track_changes": 1
+}
+

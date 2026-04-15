@@ -1,0 +1,20 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:FLR-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["floor_name", "company", "branch", "layout_json", "is_active"],
+ "fields": [
+  {"fieldname": "floor_name", "fieldtype": "Data", "label": "Floor Name", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "layout_json", "fieldtype": "Code", "label": "Layout JSON", "options": "JSON"},
+  {"fieldname": "is_active", "fieldtype": "Check", "label": "Is Active", "default": "1"}
+ ],
+ "module": "Omnexa Restaurant",
+ "name": "Restaurant Floor",
+ "permissions": [{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "print": 1, "email": 1, "export": 1, "report": 1, "share": 1}],
+ "track_changes": 1
+}
+

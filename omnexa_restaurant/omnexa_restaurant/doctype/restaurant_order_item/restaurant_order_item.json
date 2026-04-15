@@ -1,0 +1,22 @@
+{
+ "actions": [],
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": ["menu_item", "quantity", "price", "cost", "modifiers", "notes", "line_amount", "line_cost"],
+ "fields": [
+  {"fieldname": "menu_item", "fieldtype": "Link", "label": "Menu Item", "options": "Menu Item", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "quantity", "fieldtype": "Float", "label": "Quantity", "default": "1", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "price", "fieldtype": "Currency", "label": "Price", "default": "0"},
+  {"fieldname": "cost", "fieldtype": "Currency", "label": "Cost", "default": "0"},
+  {"fieldname": "modifiers", "fieldtype": "Small Text", "label": "Modifiers"},
+  {"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"},
+  {"fieldname": "line_amount", "fieldtype": "Currency", "label": "Line Amount", "read_only": 1},
+  {"fieldname": "line_cost", "fieldtype": "Currency", "label": "Line Cost", "read_only": 1}
+ ],
+ "istable": 1,
+ "module": "Omnexa Restaurant",
+ "name": "Restaurant Order Item",
+ "permissions": []
+}
+

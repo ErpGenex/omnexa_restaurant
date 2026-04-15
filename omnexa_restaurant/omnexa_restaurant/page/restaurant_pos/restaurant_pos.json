@@ -1,0 +1,17 @@
+{
+ "content": null,
+ "docstatus": 0,
+ "doctype": "Page",
+ "module": "Omnexa Restaurant",
+ "name": "restaurant-pos",
+ "page_name": "restaurant-pos",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Manager"},
+  {"role": "Cashier"},
+  {"role": "Waiter"}
+ ],
+ "standard": "Yes",
+ "title": "Restaurant POS"
+}
+

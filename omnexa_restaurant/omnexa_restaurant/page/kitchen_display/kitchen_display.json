@@ -1,0 +1,16 @@
+{
+ "content": null,
+ "docstatus": 0,
+ "doctype": "Page",
+ "module": "Omnexa Restaurant",
+ "name": "kitchen-display",
+ "page_name": "kitchen-display",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Manager"},
+  {"role": "Chef"}
+ ],
+ "standard": "Yes",
+ "title": "Kitchen Display"
+}
+

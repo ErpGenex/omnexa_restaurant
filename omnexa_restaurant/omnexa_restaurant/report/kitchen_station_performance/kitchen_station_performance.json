@@ -1,0 +1,14 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "module": "Omnexa Restaurant",
+ "name": "Kitchen Station Performance",
+ "prepared_report": 0,
+ "ref_doctype": "Menu Item",
+ "report_name": "Kitchen Station Performance",
+ "report_type": "Script Report",
+ "roles": [{"role": "System Manager"}, {"role": "Manager"}, {"role": "Chef"}]
+}
+

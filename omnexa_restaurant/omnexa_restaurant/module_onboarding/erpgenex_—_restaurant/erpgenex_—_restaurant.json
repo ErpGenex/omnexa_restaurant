@@ -1,0 +1,41 @@
+{
+ "allow_roles": [
+  {
+   "role": "Desk User"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "creation": "2026-04-20 00:31:42.575099",
+ "docstatus": 0,
+ "doctype": "Module Onboarding",
+ "documentation_url": "https://frappe.io/framework",
+ "idx": 0,
+ "is_complete": 0,
+ "modified": "2026-04-20 02:24:48.205196",
+ "modified_by": "Administrator",
+ "module": "Omnexa Restaurant",
+ "name": "ERPGENEX \u2014 Restaurant",
+ "owner": "Administrator",
+ "steps": [
+  {
+   "step": "ERPGENEX-WS-restaurant-01-user_branch_access"
+  },
+  {
+   "step": "ERPGENEX-WS-restaurant-02-restaurant_floor"
+  },
+  {
+   "step": "ERPGENEX-WS-restaurant-03-restaurant_table"
+  },
+  {
+   "step": "ERPGENEX-WS-restaurant-04-menu_item"
+  },
+  {
+   "step": "ERPGENEX-WS-restaurant-home"
+  }
+ ],
+ "subtitle": "Guided setup for this workspace.",
+ "success_message": "You are ready to work in Restaurant.",
+ "title": "ERPGENEX \u00b7 Restaurant"
+}

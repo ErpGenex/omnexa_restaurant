@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"rst-h1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Restaurant & Cafe</b></span>\",\"col\":12}},{\"id\":\"rst-c1\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"rst-c2\",\"type\":\"card\",\"data\":{\"card_name\":\"Operations\",\"col\":4}},{\"id\":\"rst-c3\",\"type\":\"card\",\"data\":{\"card_name\":\"Kitchen & Delivery\",\"col\":4}},{\"id\":\"rst-c4\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\": \"erpgenex-onboarding\", \"type\": \"onboarding\", \"data\": {\"onboarding_name\": \"ERPGENEX — Restaurant\", \"col\": 12}}, {\"id\": \"rst-h1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Restaurant & Cafe</b></span>\", \"col\": 12}}, {\"id\": \"rst-c1\", \"type\": \"card\", \"data\": {\"card_name\": \"Master Data\", \"col\": 4}}, {\"id\": \"rst-c2\", \"type\": \"card\", \"data\": {\"card_name\": \"Operations\", \"col\": 4}}, {\"id\": \"rst-c3\", \"type\": \"card\", \"data\": {\"card_name\": \"Kitchen & Delivery\", \"col\": 4}}, {\"id\": \"rst-c4\", \"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -10,30 +10,190 @@
  "is_hidden": 0,
  "label": "Restaurant",
  "links": [
-  {"hidden": 0, "label": "Master Data", "type": "Card Break"},
-  {"hidden": 0, "icon": "layout", "label": "Restaurant Floor", "link_to": "Restaurant Floor", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "grid", "label": "Restaurant Table", "link_to": "Restaurant Table", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "coffee", "label": "Menu Item", "link_to": "Menu Item", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "layers", "label": "Restaurant Recipe", "link_to": "Restaurant Recipe", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Operations", "type": "Card Break"},
-  {"hidden": 0, "icon": "monitor", "label": "Restaurant POS", "link_to": "restaurant-pos", "link_type": "Page", "type": "Link"},
-  {"hidden": 0, "icon": "activity", "label": "Kitchen Display", "link_to": "kitchen-display", "link_type": "Page", "type": "Link"},
-  {"hidden": 0, "icon": "shopping-cart", "label": "Restaurant Order", "link_to": "Restaurant Order", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "users", "label": "Customer Profile", "link_to": "Customer Profile", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Kitchen & Delivery", "type": "Card Break"},
-  {"hidden": 0, "icon": "tool", "label": "Kitchen Station", "link_to": "Kitchen Station", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "printer", "label": "Kitchen Printer", "link_to": "Kitchen Printer", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "file", "label": "Kitchen Print Template", "link_to": "Kitchen Print Template", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "printer", "label": "Kitchen Print Job", "link_to": "Kitchen Print Job", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "file-text", "label": "Kitchen Ticket", "link_to": "Kitchen Ticket", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "map-pin", "label": "Delivery Zone", "link_to": "Delivery Zone", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "navigation", "label": "Delivery Driver", "link_to": "Delivery Driver", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "alert-triangle", "label": "Waste Log", "link_to": "Waste Log", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Reports", "type": "Card Break"},
-  {"hidden": 0, "icon": "activity", "is_query_report": 1, "label": "Restaurant Sales Summary", "link_to": "Restaurant Sales Summary", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "bar-chart-2", "is_query_report": 1, "label": "Item Profitability", "link_to": "Item Profitability", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "pie-chart", "is_query_report": 1, "label": "Kitchen Station Performance", "link_to": "Kitchen Station Performance", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "alert-octagon", "is_query_report": 1, "label": "Waste Analysis", "link_to": "Waste Analysis", "link_type": "Report", "type": "Link"}
+  {
+   "hidden": 0,
+   "label": "Master Data",
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "layout",
+   "label": "Restaurant Floor",
+   "link_to": "Restaurant Floor",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "grid",
+   "label": "Restaurant Table",
+   "link_to": "Restaurant Table",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "coffee",
+   "label": "Menu Item",
+   "link_to": "Menu Item",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "layers",
+   "label": "Restaurant Recipe",
+   "link_to": "Restaurant Recipe",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "label": "Operations",
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "monitor",
+   "label": "Restaurant POS",
+   "link_to": "restaurant-pos",
+   "link_type": "Page",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "activity",
+   "label": "Kitchen Display",
+   "link_to": "kitchen-display",
+   "link_type": "Page",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "shopping-cart",
+   "label": "Restaurant Order",
+   "link_to": "Restaurant Order",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "users",
+   "label": "Customer Profile",
+   "link_to": "Customer Profile",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "label": "Kitchen & Delivery",
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "tool",
+   "label": "Kitchen Station",
+   "link_to": "Kitchen Station",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "printer",
+   "label": "Kitchen Printer",
+   "link_to": "Kitchen Printer",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "file",
+   "label": "Kitchen Print Template",
+   "link_to": "Kitchen Print Template",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "printer",
+   "label": "Kitchen Print Job",
+   "link_to": "Kitchen Print Job",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "file-text",
+   "label": "Kitchen Ticket",
+   "link_to": "Kitchen Ticket",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "map-pin",
+   "label": "Delivery Zone",
+   "link_to": "Delivery Zone",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "navigation",
+   "label": "Delivery Driver",
+   "link_to": "Delivery Driver",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "alert-triangle",
+   "label": "Waste Log",
+   "link_to": "Waste Log",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "label": "Reports",
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "activity",
+   "is_query_report": 1,
+   "label": "Restaurant Sales Summary",
+   "link_to": "Restaurant Sales Summary",
+   "link_type": "Report",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "bar-chart-2",
+   "is_query_report": 1,
+   "label": "Item Profitability",
+   "link_to": "Item Profitability",
+   "link_type": "Report",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "pie-chart",
+   "is_query_report": 1,
+   "label": "Kitchen Station Performance",
+   "link_to": "Kitchen Station Performance",
+   "link_type": "Report",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "alert-octagon",
+   "is_query_report": 1,
+   "label": "Waste Analysis",
+   "link_to": "Waste Analysis",
+   "link_type": "Report",
+   "type": "Link"
+  }
  ],
  "module": "Omnexa Restaurant",
  "name": "Restaurant",
@@ -45,4 +205,3 @@
  "shortcuts": [],
  "title": "Restaurant"
 }
-

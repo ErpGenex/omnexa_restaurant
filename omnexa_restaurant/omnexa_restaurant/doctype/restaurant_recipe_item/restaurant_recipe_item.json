@@ -3,15 +3,55 @@
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
- "field_order": ["ingredient_item", "qty", "waste_percentage"],
+ "field_order": [
+  "identity_section",
+  "ingredient_item",
+  "qty",
+  "waste_percentage",
+  "control_section",
+  "line_reference"
+ ],
  "fields": [
-  {"fieldname": "ingredient_item", "fieldtype": "Link", "label": "Ingredient Item", "options": "Item", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "qty", "fieldtype": "Float", "label": "Quantity", "default": "0", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "waste_percentage", "fieldtype": "Percent", "label": "Waste %", "default": "0"}
+  {
+   "fieldname": "identity_section",
+   "fieldtype": "Section Break",
+   "label": "Recipe Item Identity"
+  },
+  {
+   "fieldname": "ingredient_item",
+   "fieldtype": "Link",
+   "label": "Ingredient Item",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "Quantity",
+   "default": "0",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "waste_percentage",
+   "fieldtype": "Percent",
+   "label": "Waste %",
+   "default": "0"
+  },
+  {
+   "fieldname": "control_section",
+   "fieldtype": "Section Break",
+   "label": "Control"
+  },
+  {
+   "fieldname": "line_reference",
+   "fieldtype": "Data",
+   "label": "Line Reference"
+  }
  ],
  "istable": 1,
  "module": "Omnexa Restaurant",
  "name": "Restaurant Recipe Item",
  "permissions": []
 }
-

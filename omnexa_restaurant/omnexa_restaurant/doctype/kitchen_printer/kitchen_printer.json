@@ -4,19 +4,97 @@
  "autoname": "format:KPR-{YYYY}-{#####}",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["printer_name", "ip_address", "connection_type", "kitchen_station", "company", "branch", "is_active"],
+ "field_order": [
+  "identity_section",
+  "printer_name",
+  "ip_address",
+  "connection_type",
+  "kitchen_station",
+  "company",
+  "branch",
+  "is_active",
+  "control_section",
+  "device_reference"
+ ],
  "fields": [
-  {"fieldname": "printer_name", "fieldtype": "Data", "label": "Printer Name", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "ip_address", "fieldtype": "Data", "label": "IP Address"},
-  {"fieldname": "connection_type", "fieldtype": "Select", "label": "Connection Type", "options": "LAN\nUSB\nBluetooth", "default": "LAN"},
-  {"fieldname": "kitchen_station", "fieldtype": "Link", "label": "Kitchen Station", "options": "Kitchen Station"},
-  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "is_active", "fieldtype": "Check", "label": "Is Active", "default": "1"}
+  {
+   "fieldname": "identity_section",
+   "fieldtype": "Section Break",
+   "label": "Printer Identity"
+  },
+  {
+   "fieldname": "printer_name",
+   "fieldtype": "Data",
+   "label": "Printer Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "label": "IP Address"
+  },
+  {
+   "fieldname": "connection_type",
+   "fieldtype": "Select",
+   "label": "Connection Type",
+   "options": "LAN\nUSB\nBluetooth",
+   "default": "LAN"
+  },
+  {
+   "fieldname": "kitchen_station",
+   "fieldtype": "Link",
+   "label": "Kitchen Station",
+   "options": "Kitchen Station"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": "1"
+  },
+  {
+   "fieldname": "control_section",
+   "fieldtype": "Section Break",
+   "label": "Control"
+  },
+  {
+   "fieldname": "device_reference",
+   "fieldtype": "Data",
+   "label": "Device Reference"
+  }
  ],
  "module": "Omnexa Restaurant",
  "name": "Kitchen Printer",
- "permissions": [{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "print": 1, "email": 1, "export": 1, "report": 1, "share": 1}],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "export": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
  "track_changes": 1
 }
-

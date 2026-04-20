@@ -4,18 +4,91 @@
  "autoname": "field:zone_name",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["zone_name", "company", "branch", "delivery_fee", "eta_mins", "is_active"],
+ "field_order": [
+  "identity_section",
+  "zone_name",
+  "company",
+  "branch",
+  "delivery_fee",
+  "eta_mins",
+  "is_active",
+  "control_section",
+  "zone_code"
+ ],
  "fields": [
-  {"fieldname": "zone_name", "fieldtype": "Data", "label": "Zone Name", "reqd": 1, "unique": 1, "in_list_view": 1},
-  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "delivery_fee", "fieldtype": "Currency", "label": "Delivery Fee", "default": "0"},
-  {"fieldname": "eta_mins", "fieldtype": "Int", "label": "ETA (Mins)", "default": "30"},
-  {"fieldname": "is_active", "fieldtype": "Check", "label": "Is Active", "default": "1"}
+  {
+   "fieldname": "identity_section",
+   "fieldtype": "Section Break",
+   "label": "Zone Identity"
+  },
+  {
+   "fieldname": "zone_name",
+   "fieldtype": "Data",
+   "label": "Zone Name",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "delivery_fee",
+   "fieldtype": "Currency",
+   "label": "Delivery Fee",
+   "default": "0"
+  },
+  {
+   "fieldname": "eta_mins",
+   "fieldtype": "Int",
+   "label": "ETA (Mins)",
+   "default": "30"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": "1"
+  },
+  {
+   "fieldname": "control_section",
+   "fieldtype": "Section Break",
+   "label": "Control"
+  },
+  {
+   "fieldname": "zone_code",
+   "fieldtype": "Data",
+   "label": "Zone Code"
+  }
  ],
  "module": "Omnexa Restaurant",
  "name": "Delivery Zone",
- "permissions": [{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "print": 1, "email": 1, "export": 1, "report": 1, "share": 1}],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "export": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
  "track_changes": 1
 }
-

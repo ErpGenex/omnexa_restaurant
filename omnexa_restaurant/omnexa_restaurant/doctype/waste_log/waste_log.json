@@ -4,19 +4,102 @@
  "autoname": "format:WST-{YYYY}-{#####}",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["posting_date", "item", "qty", "reason", "cost_impact", "company", "branch"],
+ "field_order": [
+  "identity_section",
+  "posting_date",
+  "item",
+  "qty",
+  "reason",
+  "cost_impact",
+  "company",
+  "branch",
+  "control_section",
+  "waste_owner"
+ ],
  "fields": [
-  {"fieldname": "posting_date", "fieldtype": "Date", "label": "Posting Date", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "item", "fieldtype": "Link", "label": "Item", "options": "Item", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "qty", "fieldtype": "Float", "label": "Qty", "default": "0", "reqd": 1},
-  {"fieldname": "reason", "fieldtype": "Select", "label": "Reason", "options": "Spoilage\nExpired\nPreparation Loss\nCustomer Return\nOther", "default": "Preparation Loss"},
-  {"fieldname": "cost_impact", "fieldtype": "Currency", "label": "Cost Impact", "default": "0"},
-  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
-  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+  {
+   "fieldname": "identity_section",
+   "fieldtype": "Section Break",
+   "label": "Waste Log Identity"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "Qty",
+   "default": "0",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Select",
+   "label": "Reason",
+   "options": "Spoilage\nExpired\nPreparation Loss\nCustomer Return\nOther",
+   "default": "Preparation Loss"
+  },
+  {
+   "fieldname": "cost_impact",
+   "fieldtype": "Currency",
+   "label": "Cost Impact",
+   "default": "0"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "control_section",
+   "fieldtype": "Section Break",
+   "label": "Control"
+  },
+  {
+   "fieldname": "waste_owner",
+   "fieldtype": "Link",
+   "label": "Waste Owner",
+   "options": "User"
+  }
  ],
  "module": "Omnexa Restaurant",
  "name": "Waste Log",
- "permissions": [{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "print": 1, "email": 1, "export": 1, "report": 1, "share": 1}],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "export": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
  "track_changes": 1
 }
-

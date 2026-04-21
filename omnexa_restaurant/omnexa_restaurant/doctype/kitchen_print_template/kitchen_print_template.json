@@ -1,89 +1,77 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "format:KPT-{YYYY}-{#####}",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "kitchen_station",
-  "company",
-  "branch",
-  "is_active",
-  "template_text",
-  "control_section",
-  "template_owner"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "fieldtype": "Section Break",
-   "label": "Template Identity"
-  },
-  {
-   "fieldname": "kitchen_station",
-   "fieldtype": "Link",
-   "label": "Kitchen Station",
-   "options": "Kitchen Station",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "branch",
-   "fieldtype": "Link",
-   "label": "Branch",
-   "options": "Branch",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "is_active",
-   "fieldtype": "Check",
-   "label": "Is Active",
-   "default": "1"
-  },
-  {
-   "fieldname": "template_text",
-   "fieldtype": "Code",
-   "label": "Template Text",
-   "options": "Text",
-   "description": "Use {order_number}, {order_type}, {table}, {station}, {items} placeholders."
-  },
-  {
-   "fieldname": "control_section",
-   "fieldtype": "Section Break",
-   "label": "Control"
-  },
-  {
-   "fieldname": "template_owner",
-   "fieldtype": "Link",
-   "label": "Template Owner",
-   "options": "User"
-  }
- ],
- "module": "Omnexa Restaurant",
- "name": "Kitchen Print Template",
- "permissions": [
-  {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "print": 1,
-   "email": 1,
-   "export": 1,
-   "report": 1,
-   "share": 1
-  }
- ],
- "track_changes": 1
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:KPT-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"kitchen_station",
+		"company",
+		"branch",
+		"is_active",
+		"template_text",
+		"template_owner"
+	],
+	"fields": [
+		{
+			"fieldname": "kitchen_station",
+			"fieldtype": "Link",
+			"label": "Kitchen Station",
+			"options": "Kitchen Station",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"label": "Is Active",
+			"default": "1"
+		},
+		{
+			"fieldname": "template_text",
+			"fieldtype": "Code",
+			"label": "Template Text",
+			"options": "Text",
+			"description": "Use {order_number}, {order_type}, {table}, {station}, {items} placeholders."
+		},
+		{
+			"fieldname": "template_owner",
+			"fieldtype": "Link",
+			"label": "Template Owner",
+			"options": "User"
+		}
+	],
+	"module": "Omnexa Restaurant",
+	"name": "Kitchen Print Template",
+	"permissions": [
+		{
+			"role": "System Manager",
+			"read": 1,
+			"write": 1,
+			"create": 1,
+			"delete": 1,
+			"print": 1,
+			"email": 1,
+			"export": 1,
+			"report": 1,
+			"share": 1
+		}
+	],
+	"track_changes": 1
 }

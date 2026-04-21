@@ -1,63 +1,51 @@
 {
- "actions": [],
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "payment_mode",
-  "amount",
-  "tips_amount",
-  "reference_no",
-  "control_section",
-  "payment_reference"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "fieldtype": "Section Break",
-   "label": "Payment Identity"
-  },
-  {
-   "fieldname": "payment_mode",
-   "fieldtype": "Select",
-   "label": "Payment Mode",
-   "options": "Cash\nCard\nWallet",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "amount",
-   "fieldtype": "Currency",
-   "label": "Amount",
-   "default": "0",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "tips_amount",
-   "fieldtype": "Currency",
-   "label": "Tips",
-   "default": "0"
-  },
-  {
-   "fieldname": "reference_no",
-   "fieldtype": "Data",
-   "label": "Reference No"
-  },
-  {
-   "fieldname": "control_section",
-   "fieldtype": "Section Break",
-   "label": "Control"
-  },
-  {
-   "fieldname": "payment_reference",
-   "fieldtype": "Data",
-   "label": "Payment Reference"
-  }
- ],
- "istable": 1,
- "module": "Omnexa Restaurant",
- "name": "Restaurant Payment Entry",
- "permissions": []
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"payment_mode",
+		"amount",
+		"tips_amount",
+		"reference_no",
+		"payment_reference"
+	],
+	"fields": [
+		{
+			"fieldname": "payment_mode",
+			"fieldtype": "Select",
+			"label": "Payment Mode",
+			"options": "Cash\nCard\nWallet",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "amount",
+			"fieldtype": "Currency",
+			"label": "Amount",
+			"default": "0",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "tips_amount",
+			"fieldtype": "Currency",
+			"label": "Tips",
+			"default": "0"
+		},
+		{
+			"fieldname": "reference_no",
+			"fieldtype": "Data",
+			"label": "Reference No"
+		},
+		{
+			"fieldname": "payment_reference",
+			"fieldtype": "Data",
+			"label": "Payment Reference"
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Restaurant",
+	"name": "Restaurant Payment Entry",
+	"permissions": []
 }

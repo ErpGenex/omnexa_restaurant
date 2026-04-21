@@ -1,87 +1,75 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "format:KST-{YYYY}-{#####}",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "station_name",
-  "cost_center",
-  "printer_assigned",
-  "company",
-  "branch",
-  "control_section",
-  "station_owner"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "fieldtype": "Section Break",
-   "label": "Station Identity"
-  },
-  {
-   "fieldname": "station_name",
-   "fieldtype": "Data",
-   "label": "Kitchen Station",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "cost_center",
-   "fieldtype": "Link",
-   "label": "Cost Center",
-   "options": "Cost Center"
-  },
-  {
-   "fieldname": "printer_assigned",
-   "fieldtype": "Link",
-   "label": "Default Printer",
-   "options": "Kitchen Printer"
-  },
-  {
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "branch",
-   "fieldtype": "Link",
-   "label": "Branch",
-   "options": "Branch",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "control_section",
-   "fieldtype": "Section Break",
-   "label": "Control"
-  },
-  {
-   "fieldname": "station_owner",
-   "fieldtype": "Link",
-   "label": "Station Owner",
-   "options": "User"
-  }
- ],
- "module": "Omnexa Restaurant",
- "name": "Kitchen Station",
- "permissions": [
-  {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "print": 1,
-   "email": 1,
-   "export": 1,
-   "report": 1,
-   "share": 1
-  }
- ],
- "track_changes": 1
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:KST-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"station_name",
+		"cost_center",
+		"printer_assigned",
+		"company",
+		"branch",
+		"station_owner"
+	],
+	"fields": [
+		{
+			"fieldname": "station_name",
+			"fieldtype": "Data",
+			"label": "Kitchen Station",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "cost_center",
+			"fieldtype": "Link",
+			"label": "Cost Center",
+			"options": "Cost Center"
+		},
+		{
+			"fieldname": "printer_assigned",
+			"fieldtype": "Link",
+			"label": "Default Printer",
+			"options": "Kitchen Printer"
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "station_owner",
+			"fieldtype": "Link",
+			"label": "Station Owner",
+			"options": "User"
+		}
+	],
+	"module": "Omnexa Restaurant",
+	"name": "Kitchen Station",
+	"permissions": [
+		{
+			"role": "System Manager",
+			"read": 1,
+			"write": 1,
+			"create": 1,
+			"delete": 1,
+			"print": 1,
+			"email": 1,
+			"export": 1,
+			"report": 1,
+			"share": 1
+		}
+	],
+	"track_changes": 1
 }

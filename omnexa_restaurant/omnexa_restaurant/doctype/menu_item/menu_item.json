@@ -1,121 +1,119 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "field:item_code",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "item_code",
-  "item_name",
-  "category",
-  "is_manufactured",
-  "default_price",
-  "kitchen_station",
-  "dynamic_price_enabled",
-  "company",
-  "branch",
-  "is_active",
-  "control_section",
-  "classification_code"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "fieldtype": "Section Break",
-   "label": "Menu Item Identity"
-  },
-  {
-   "fieldname": "item_code",
-   "fieldtype": "Data",
-   "label": "Item Code",
-   "reqd": 1,
-   "unique": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "item_name",
-   "fieldtype": "Data",
-   "label": "Item Name",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "category",
-   "fieldtype": "Data",
-   "label": "Category",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "is_manufactured",
-   "fieldtype": "Check",
-   "label": "Is Manufactured",
-   "default": "0"
-  },
-  {
-   "fieldname": "default_price",
-   "fieldtype": "Currency",
-   "label": "Default Price",
-   "default": "0"
-  },
-  {
-   "fieldname": "kitchen_station",
-   "fieldtype": "Link",
-   "label": "Kitchen Station",
-   "options": "Kitchen Station"
-  },
-  {
-   "fieldname": "dynamic_price_enabled",
-   "fieldtype": "Check",
-   "label": "Dynamic Price Enabled",
-   "default": "0"
-  },
-  {
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company",
-   "reqd": 1
-  },
-  {
-   "fieldname": "branch",
-   "fieldtype": "Link",
-   "label": "Branch",
-   "options": "Branch",
-   "reqd": 1
-  },
-  {
-   "fieldname": "is_active",
-   "fieldtype": "Check",
-   "label": "Is Active",
-   "default": "1"
-  },
-  {
-   "fieldname": "control_section",
-   "fieldtype": "Section Break",
-   "label": "Control"
-  },
-  {
-   "fieldname": "classification_code",
-   "fieldtype": "Data",
-   "label": "Classification Code"
-  }
- ],
- "module": "Omnexa Restaurant",
- "name": "Menu Item",
- "permissions": [
-  {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "print": 1,
-   "email": 1,
-   "export": 1,
-   "report": 1,
-   "share": 1
-  }
- ],
- "track_changes": 1
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:item_code",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"item_code",
+		"item_name",
+		"category",
+		"column_break_omnexa_1",
+		"is_manufactured",
+		"default_price",
+		"kitchen_station",
+		"dynamic_price_enabled",
+		"column_break_omnexa_2",
+		"company",
+		"branch",
+		"is_active",
+		"classification_code"
+	],
+	"fields": [
+		{
+			"fieldname": "item_code",
+			"fieldtype": "Data",
+			"label": "Item Code",
+			"reqd": 1,
+			"unique": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "item_name",
+			"fieldtype": "Data",
+			"label": "Item Name",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "category",
+			"fieldtype": "Data",
+			"label": "Category",
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "is_manufactured",
+			"fieldtype": "Check",
+			"label": "Is Manufactured",
+			"default": "0"
+		},
+		{
+			"fieldname": "default_price",
+			"fieldtype": "Currency",
+			"label": "Default Price",
+			"default": "0"
+		},
+		{
+			"fieldname": "kitchen_station",
+			"fieldtype": "Link",
+			"label": "Kitchen Station",
+			"options": "Kitchen Station"
+		},
+		{
+			"fieldname": "dynamic_price_enabled",
+			"fieldtype": "Check",
+			"label": "Dynamic Price Enabled",
+			"default": "0"
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch",
+			"reqd": 1
+		},
+		{
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"label": "Is Active",
+			"default": "1"
+		},
+		{
+			"fieldname": "classification_code",
+			"fieldtype": "Data",
+			"label": "Classification Code"
+		},
+		{
+			"fieldname": "column_break_omnexa_1",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "column_break_omnexa_2",
+			"fieldtype": "Column Break"
+		}
+	],
+	"module": "Omnexa Restaurant",
+	"name": "Menu Item",
+	"permissions": [
+		{
+			"role": "System Manager",
+			"read": 1,
+			"write": 1,
+			"create": 1,
+			"delete": 1,
+			"print": 1,
+			"email": 1,
+			"export": 1,
+			"report": 1,
+			"share": 1
+		}
+	],
+	"track_changes": 1
 }

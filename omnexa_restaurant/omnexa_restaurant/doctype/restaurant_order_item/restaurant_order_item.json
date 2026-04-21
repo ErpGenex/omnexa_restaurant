@@ -1,90 +1,88 @@
 {
- "actions": [],
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "menu_item",
-  "quantity",
-  "price",
-  "cost",
-  "modifiers",
-  "notes",
-  "line_amount",
-  "line_cost",
-  "control_section",
-  "line_reference"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "fieldtype": "Section Break",
-   "label": "Order Item Identity"
-  },
-  {
-   "fieldname": "menu_item",
-   "fieldtype": "Link",
-   "label": "Menu Item",
-   "options": "Menu Item",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "quantity",
-   "fieldtype": "Float",
-   "label": "Quantity",
-   "default": "1",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "price",
-   "fieldtype": "Currency",
-   "label": "Price",
-   "default": "0"
-  },
-  {
-   "fieldname": "cost",
-   "fieldtype": "Currency",
-   "label": "Cost",
-   "default": "0"
-  },
-  {
-   "fieldname": "modifiers",
-   "fieldtype": "Small Text",
-   "label": "Modifiers"
-  },
-  {
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
-  },
-  {
-   "fieldname": "line_amount",
-   "fieldtype": "Currency",
-   "label": "Line Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "line_cost",
-   "fieldtype": "Currency",
-   "label": "Line Cost",
-   "read_only": 1
-  },
-  {
-   "fieldname": "control_section",
-   "fieldtype": "Section Break",
-   "label": "Control"
-  },
-  {
-   "fieldname": "line_reference",
-   "fieldtype": "Data",
-   "label": "Line Reference"
-  }
- ],
- "istable": 1,
- "module": "Omnexa Restaurant",
- "name": "Restaurant Order Item",
- "permissions": []
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"menu_item",
+		"quantity",
+		"price",
+		"column_break_omnexa_1",
+		"cost",
+		"modifiers",
+		"notes",
+		"column_break_omnexa_2",
+		"line_amount",
+		"line_cost",
+		"line_reference"
+	],
+	"fields": [
+		{
+			"fieldname": "menu_item",
+			"fieldtype": "Link",
+			"label": "Menu Item",
+			"options": "Menu Item",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "quantity",
+			"fieldtype": "Float",
+			"label": "Quantity",
+			"default": "1",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "price",
+			"fieldtype": "Currency",
+			"label": "Price",
+			"default": "0"
+		},
+		{
+			"fieldname": "cost",
+			"fieldtype": "Currency",
+			"label": "Cost",
+			"default": "0"
+		},
+		{
+			"fieldname": "modifiers",
+			"fieldtype": "Small Text",
+			"label": "Modifiers"
+		},
+		{
+			"fieldname": "notes",
+			"fieldtype": "Small Text",
+			"label": "Notes"
+		},
+		{
+			"fieldname": "line_amount",
+			"fieldtype": "Currency",
+			"label": "Line Amount",
+			"read_only": 1
+		},
+		{
+			"fieldname": "line_cost",
+			"fieldtype": "Currency",
+			"label": "Line Cost",
+			"read_only": 1
+		},
+		{
+			"fieldname": "line_reference",
+			"fieldtype": "Data",
+			"label": "Line Reference"
+		},
+		{
+			"fieldname": "column_break_omnexa_1",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "column_break_omnexa_2",
+			"fieldtype": "Column Break"
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Restaurant",
+	"name": "Restaurant Order Item",
+	"permissions": []
 }

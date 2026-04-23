@@ -2,7 +2,7 @@ app_name = "omnexa_restaurant"
 app_title = "ErpGenEx Restaurant"
 app_publisher = "ErpGenEx"
 app_description = "Global Restaurant and Cafe Management"
-app_email = "dev@omnexa.com"
+app_email = "dev@erpgenex.com"
 app_license = "mit"
 
 # Apps

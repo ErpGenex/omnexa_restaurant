@@ -1,7 +1,7 @@
 [project]
 name = "omnexa_restaurant"
 authors = [
-    { name = "ErpGenEx", email = "dev@omnexa.com"}
+    { name = "ErpGenEx", email = "dev@erpgenex.com"}
 ]
 description = "Global Restaurant and Cafe Management"
 requires-python = ">=3.10"

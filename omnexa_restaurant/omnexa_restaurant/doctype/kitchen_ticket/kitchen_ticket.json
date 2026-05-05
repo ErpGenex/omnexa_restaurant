@@ -5,6 +5,7 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"restaurant_order",
 		"kitchen_station",
 		"kitchen_printer",
@@ -16,6 +17,11 @@
 		"ticket_reference"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
 		{
 			"fieldname": "restaurant_order",
 			"fieldtype": "Link",

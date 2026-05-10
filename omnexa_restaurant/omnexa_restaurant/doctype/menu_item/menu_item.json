@@ -5,12 +5,14 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"item_code",
 		"item_name",
 		"category",
 		"column_break_omnexa_1",
 		"is_manufactured",
 		"default_price",
+		"tab_break_details",
 		"kitchen_station",
 		"dynamic_price_enabled",
 		"column_break_omnexa_2",
@@ -20,6 +22,16 @@
 		"classification_code"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_details",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "item_code",
 			"fieldtype": "Data",

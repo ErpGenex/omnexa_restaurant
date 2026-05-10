@@ -5,6 +5,7 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"table_number",
 		"floor",
 		"capacity",
@@ -15,6 +16,11 @@
 		"table_code"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
 		{
 			"fieldname": "table_number",
 			"fieldtype": "Data",

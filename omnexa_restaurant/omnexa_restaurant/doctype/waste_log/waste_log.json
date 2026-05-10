@@ -5,6 +5,7 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"posting_date",
 		"item",
 		"qty",
@@ -15,6 +16,11 @@
 		"waste_owner"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
 		{
 			"fieldname": "posting_date",
 			"fieldtype": "Date",

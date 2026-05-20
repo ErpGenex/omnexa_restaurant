@@ -410,3 +410,10 @@ def send_kot_to_printer(ticket_name: str):
 	frappe.publish_realtime("restaurant_kds_update", {"ticket": ticket.name, "status": "Printed", "order": ticket.restaurant_order})
 	return {"ticket": ticket.name, "print_job": job.name, "status": "Printed"}
 
+@frappe.whitelist()
+def preview_sector_kpi(scenario: str | None = None, params: str | None = None) -> dict:
+	"""SAP Wave C — sector KPI preview (omnexa_core bridge)."""
+	from omnexa_core.omnexa_core.vertical_api import preview_sector_kpi as _core_preview
+
+	return _core_preview("restaurant", scenario=scenario, params=params)
+

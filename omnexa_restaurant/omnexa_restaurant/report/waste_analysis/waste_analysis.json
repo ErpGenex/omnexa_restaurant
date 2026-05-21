@@ -9,6 +9,39 @@
  "ref_doctype": "Waste Log",
  "report_name": "Waste Analysis",
  "report_type": "Script Report",
- "roles": [{"role": "System Manager"}, {"role": "Manager"}, {"role": "Chef"}]
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Manager"
+  },
+  {
+   "role": "Chef"
+  }
+ ],
+ "filters": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "width": "180px"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "width": "120px"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "width": "120px"
+  }
+ ]
 }
-

@@ -9,6 +9,25 @@
  "ref_doctype": "Menu Item",
  "report_name": "Kitchen Station Performance",
  "report_type": "Script Report",
- "roles": [{"role": "System Manager"}, {"role": "Manager"}, {"role": "Chef"}]
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Manager"
+  },
+  {
+   "role": "Chef"
+  }
+ ],
+ "filters": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "width": "180px"
+  }
+ ]
 }
-

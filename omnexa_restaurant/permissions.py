@@ -46,6 +46,14 @@ def menu_item_query_conditions(user=None):
 	return _get_query_for_table("Menu Item", user)
 
 
+def menu_category_query_conditions(user=None):
+	return _get_query_for_table("Menu Category", user)
+
+
+def restaurant_offer_query_conditions(user=None):
+	return _get_query_for_table("Restaurant Offer", user)
+
+
 def restaurant_recipe_query_conditions(user=None):
 	return _get_query_for_table("Restaurant Recipe", user)
 

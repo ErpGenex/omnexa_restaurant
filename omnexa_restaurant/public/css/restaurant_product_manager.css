@@ -1,0 +1,236 @@
+/* In-POS product / offer manager */
+
+.rest-prod-panel {
+	position: absolute;
+	inset: 0;
+	background: #f0f2f5;
+	z-index: 20;
+	display: none;
+	flex-direction: column;
+}
+
+.rest-prod-panel.is-open {
+	display: flex;
+}
+
+.rest-prod-panel__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 18px;
+	background: #fff;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.rest-prod-panel__title {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.rest-prod-panel__tabs {
+	display: flex;
+	gap: 6px;
+	padding: 10px 18px;
+	background: #fff;
+	border-bottom: 1px solid #e5e7eb;
+	overflow-x: auto;
+}
+
+.rest-prod-tab {
+	border: 0;
+	background: #f3f4f6;
+	padding: 8px 14px;
+	border-radius: 999px;
+	font-size: 13px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.rest-prod-tab.is-active {
+	background: #e67e22;
+	color: #fff;
+	font-weight: 600;
+}
+
+.rest-prod-panel__toolbar {
+	display: flex;
+	gap: 10px;
+	padding: 12px 18px;
+}
+
+.rest-prod-panel__search {
+	flex: 1;
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	padding: 10px 12px;
+}
+
+.rest-prod-panel__add {
+	border: 0;
+	background: #e67e22;
+	color: #fff;
+	border-radius: 10px;
+	padding: 10px 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.rest-prod-panel__body {
+	flex: 1;
+	overflow: auto;
+	padding: 12px 18px 18px;
+}
+
+.rest-prod-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.rest-prod-table th,
+.rest-prod-table td {
+	padding: 10px 12px;
+	text-align: right;
+	border-bottom: 1px solid #f1f5f9;
+	font-size: 13px;
+}
+
+.rest-prod-table th {
+	background: #fafafa;
+	font-weight: 700;
+}
+
+.rest-prod-thumb {
+	width: 42px;
+	height: 42px;
+	border-radius: 8px;
+	object-fit: cover;
+	background: #eee;
+}
+
+.rest-prod-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 999px;
+	font-size: 11px;
+	background: #fff7ed;
+	color: #c2410c;
+}
+
+.rest-prod-actions button {
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	margin-inline-start: 6px;
+}
+
+.rest-prod-modal-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 1000;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.rest-prod-modal-backdrop.is-open {
+	display: flex;
+}
+
+.rest-prod-modal {
+	width: min(720px, 100%);
+	max-height: 90vh;
+	overflow: auto;
+	background: #fff;
+	border-radius: 14px;
+	padding: 18px;
+	direction: rtl;
+}
+
+.rest-prod-form-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.rest-prod-form-grid label {
+	display: block;
+	font-size: 12px;
+	color: #6b7280;
+	margin-bottom: 4px;
+}
+
+.rest-prod-form-grid input,
+.rest-prod-form-grid select,
+.rest-prod-form-grid textarea {
+	width: 100%;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	padding: 8px 10px;
+	font-size: 13px;
+}
+
+.rest-prod-form-grid .full {
+	grid-column: 1 / -1;
+}
+
+.rest-prod-image-preview {
+	width: 100%;
+	height: 140px;
+	border-radius: 10px;
+	background: #f3f4f6 center/cover no-repeat;
+	margin-bottom: 8px;
+}
+
+.rest-prod-modal__foot {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.rest-prod-modal__foot button {
+	border: 0;
+	border-radius: 10px;
+	padding: 10px 16px;
+	cursor: pointer;
+}
+
+.rest-prod-modal__save {
+	background: #e67e22;
+	color: #fff;
+	font-weight: 700;
+}
+
+.rest-prod-modal__cancel {
+	background: #f3f4f6;
+}
+
+.rest-prod-ing-row,
+.rest-prod-bundle-row {
+	display: grid;
+	grid-template-columns: 1fr 80px 80px 32px;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.rest-pos__main {
+	position: relative;
+}
+
+.rest-pos__offer-tag {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	background: #ef4444;
+	color: #fff;
+	font-size: 10px;
+	padding: 2px 6px;
+	border-radius: 6px;
+	font-weight: 700;
+}

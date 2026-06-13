@@ -1,3 +1,74 @@
 Customer Profile,ملف العميل
 Operations,العمليات
 Reports,تقارير
+Restaurant POS,نقطة البيع
+Kitchen Display,شاشة المطبخ
+Al-Dhawaqa Restaurant,مطعم الذواقة
+Orders,الطلبات
+Previous Orders,الطلبات السابقة
+Customers,العملاء
+Products,المنتجات
+Inventory,المخزون
+Settings,الإعدادات
+Logout,تسجيل خروج
+Cashier,الكاشير
+Search for a product...,بحث عن منتج...
+Current Order,الطلب الحالي
+Order No,رقم الطلب
+items,أصناف
+Cart is empty,السلة فارغة
+Subtotal,المجموع الفرعي
+VAT (15%),الضريبة (15%)
+Total,الإجمالي
+Complete Order,إتمام الطلب
+Clear Order,مسح الطلب
+Order completed,تم إتمام الطلب
+No menu items found.,لا توجد أصناف.
+All,الكل
+Coming soon,قريباً
+Allow pop-ups to print the receipt.,اسمح بالنوافذ المنبثقة لطباعة الإيصال.
+No tickets,لا توجد تذاكر
+Sound,الصوت
+Offer,عرض
+Product Management,إدارة المنتجات
+Back to POS,العودة لنقطة البيع
+Search products...,بحث في المنتجات...
+Add New,إضافة جديد
+Name,الاسم
+Type,النوع
+Category,الفئة
+Price,السعر
+No items,لا توجد أصناف
+Services,الخدمات
+Raw Materials,الخامات
+Bundles,البندلات
+Offers,العروض
+Edit Item,تعديل صنف
+New Item,صنف جديد
+Upload Image,رفع صورة
+Item Code,كود الصنف
+Item Name,اسم الصنف
+Product,منتج
+Service,خدمة
+Raw Material,مادة خام
+Bundle,بندل
+Tax Code,كود ضريبي
+Description,الوصف
+Recipe Ingredients (ErpGenex Items),مكونات الوصفة (أصناف ErpGenex)
+Ingredient,مكون
+Bundle Components,مكونات البندل
+Component,مكون
+Saved,تم الحفظ
+New Offer,عرض جديد
+Offer Name,اسم العرض
+Percent Discount,خصم نسبة
+Fixed Price,سعر ثابت
+optional,اختياري
+Leave blank for all,اتركه فارغاً للكل
+Discount %,نسبة الخصم
+Active,نشط
+Select Customer,اختيار عميل
+Customer selected,تم اختيار العميل
+Customer,العميل
+Menu Item,صنف القائمة
+ErpGenex Item,صنف ErpGenex

@@ -4,7 +4,9 @@ import json
 
 import frappe
 from frappe import _
-from frappe.utils import cint, flt, getdate, today
+from frappe.utils import cint, flt, getdate, get_fullname, now_datetime, today
+
+VAT_RATE = 0.15
 
 
 @frappe.whitelist()
@@ -34,19 +36,23 @@ def toggle_hold_order(order_name: str):
 
 @frappe.whitelist()
 def generate_kitchen_tickets(order_name: str):
+	from omnexa_restaurant.pos_catalog import expand_bundle_lines
+
 	order = frappe.get_doc("Restaurant Order", order_name)
 	station_items: dict[str, list[dict]] = {}
 	for row in order.items:
-		station = frappe.db.get_value("Menu Item", row.menu_item, "kitchen_station") or "Unassigned"
-		station_items.setdefault(station, [])
-		station_items[station].append(
-			{
-				"menu_item": row.menu_item,
-				"quantity": row.quantity,
-				"modifiers": row.modifiers,
-				"notes": row.notes,
-			}
-		)
+		for line in expand_bundle_lines(row.menu_item, row.quantity):
+			station = frappe.db.get_value("Menu Item", line["menu_item"], "kitchen_station") or "Unassigned"
+			station_items.setdefault(station, [])
+			station_items[station].append(
+				{
+					"menu_item": line["menu_item"],
+					"item_name": line.get("item_name"),
+					"quantity": line["quantity"],
+					"modifiers": row.modifiers,
+					"notes": row.notes,
+				}
+			)
 
 	tickets = []
 	for station, items in station_items.items():
@@ -207,9 +213,11 @@ def merge_tables(primary_order_name: str, secondary_order_name: str):
 
 @frappe.whitelist()
 def update_kitchen_ticket_status(ticket_name: str, status: str):
-	valid_status = {"Pending", "Preparing", "Ready", "Printed"}
+	valid_status = {"Pending", "Preparing", "Ready", "Printed", "Delivered"}
 	if status not in valid_status:
 		frappe.throw(_("Invalid status for kitchen ticket."))
+	if status == "Delivered":
+		status = "Printed"
 	ticket = frappe.get_doc("Kitchen Ticket", ticket_name)
 	ticket.ticket_status = status
 	ticket.save(ignore_permissions=True)
@@ -218,6 +226,205 @@ def update_kitchen_ticket_status(ticket_name: str, status: str):
 		{"ticket": ticket.name, "status": ticket.ticket_status, "order": ticket.restaurant_order},
 	)
 	return {"ticket": ticket.name, "status": ticket.ticket_status}
+
+
+def _menu_item_label(menu_item: str) -> str:
+	return frappe.db.get_value("Menu Item", menu_item, "item_name") or menu_item
+
+
+def _pos_order_display_number(order_name: str) -> str:
+	parts = (order_name or "").split("-")
+	return parts[-1] if parts else order_name
+
+
+def _order_financials(order) -> dict[str, float]:
+	subtotal = flt(order.total_amount)
+	vat = flt(subtotal * VAT_RATE, 2)
+	grand_total = flt(subtotal + vat, 2)
+	return {"subtotal": subtotal, "vat": vat, "vat_rate": VAT_RATE, "grand_total": grand_total}
+
+
+@frappe.whitelist()
+def get_pos_order_detail(order_name: str):
+	order = frappe.get_doc("Restaurant Order", order_name)
+	items = []
+	for row in order.items:
+		items.append(
+			{
+				"row_name": row.name,
+				"menu_item": row.menu_item,
+				"item_name": _menu_item_label(row.menu_item),
+				"quantity": flt(row.quantity),
+				"price": flt(row.price),
+				"line_amount": flt(row.line_amount),
+			}
+		)
+	fin = _order_financials(order)
+	return {
+		"order_name": order.name,
+		"display_number": _pos_order_display_number(order.name),
+		"items": items,
+		"items_count": len(items),
+		"status": order.status,
+		"cashier": get_fullname(order.owner),
+		**fin,
+	}
+
+
+@frappe.whitelist()
+def remove_item_from_order(order_name: str, row_name: str):
+	order = _get_editable_order(order_name)
+	order.items = [row for row in order.items if row.name != row_name]
+	if not order.items and order.status == "In Progress":
+		order.status = "Draft"
+	order.save(ignore_permissions=True)
+	return get_pos_order_detail(order.name)
+
+
+@frappe.whitelist()
+def complete_pos_order(order_name: str, customer: str | None = None):
+	from omnexa_restaurant.pos_invoicing import create_sales_invoice_from_restaurant_order
+
+	order = frappe.get_doc("Restaurant Order", order_name)
+	if order.docstatus != 0:
+		frappe.throw(_("Order is already submitted."))
+	if not order.items:
+		frappe.throw(_("Order has no items."))
+	if customer:
+		order.customer = customer
+		order.save(ignore_permissions=True)
+	order.submit()
+	invoice_result = create_sales_invoice_from_restaurant_order(order.name)
+	return {
+		"order": order.name,
+		"sales_invoice": invoice_result.get("sales_invoice"),
+		"einvoice": invoice_result.get("einvoice"),
+		"receipt_html": get_customer_receipt_html(order_name),
+	}
+
+
+@frappe.whitelist()
+def get_customer_receipt_html(order_name: str):
+	order = frappe.get_doc("Restaurant Order", order_name)
+	company = order.company or frappe.defaults.get_user_default("Company")
+	company_doc = frappe.get_doc("Company", company) if company else None
+	branch = order.branch
+	branch_address = frappe.db.get_value("Branch", branch, "address") if branch else None
+	address_line = ""
+	if branch_address and frappe.db.exists("Address", branch_address):
+		addr = frappe.get_doc("Address", branch_address)
+		address_line = ", ".join(filter(None, [addr.address_line1, addr.city]))
+	if not address_line and company_doc:
+		address_line = company_doc.country or ""
+
+	cr_number = ""
+	if company_doc:
+		cr_number = (
+			getattr(company_doc, "registration_details", None)
+			or getattr(company_doc, "company_registration", None)
+			or ""
+		)
+
+	items = []
+	for row in order.items:
+		items.append(
+			{
+				"name": _menu_item_label(row.menu_item),
+				"qty": flt(row.quantity),
+				"price": flt(row.price),
+				"total": flt(row.line_amount),
+			}
+		)
+	fin = _order_financials(order)
+	if order.sales_invoice and frappe.db.exists("Sales Invoice", order.sales_invoice):
+		si = frappe.get_doc("Sales Invoice", order.sales_invoice)
+		fin = {
+			"subtotal": flt(si.net_total),
+			"vat": flt(si.total_taxes_and_charges),
+			"vat_rate": VAT_RATE,
+			"grand_total": flt(si.grand_total),
+		}
+	from omnexa_restaurant.pos_invoicing import get_einvoice_receipt_context
+
+	einv = get_einvoice_receipt_context(order_name)
+	context = {
+		"restaurant_name_ar": (company_doc.company_name if company_doc else "مطعم الذواقة"),
+		"restaurant_name_en": (company_doc.abbr if company_doc else "ALDHAWAQA RESTAURANT"),
+		"address": address_line or "شارع الملك فهد، الرياض",
+		"phone": (company_doc.phone_no if company_doc else "9200 12345") or "9200 12345",
+		"tax_id": (company_doc.tax_id if company_doc else "300123456700003") or "300123456700003",
+		"cr_number": cr_number or "300123456700",
+		"order_number": _pos_order_display_number(order.name),
+		"order_date": frappe.utils.formatdate(order.creation, "dd-MM-yyyy"),
+		"cashier": get_fullname(order.owner),
+		"sales_invoice": order.sales_invoice or "",
+		"einvoice_uuid": einv.get("uuid") or "",
+		"qr_image_base64": einv.get("qr_image_base64") or "",
+		"items": items,
+		**fin,
+	}
+	return frappe.render_template(
+		"omnexa_restaurant/templates/thermal_receipt.html",
+		context,
+		is_path=True,
+	)
+
+
+@frappe.whitelist()
+def get_kds_board(station: str | None = None):
+	filters = {"docstatus": ["<", 2], "ticket_status": ["in", ["Pending", "Preparing", "Ready", "Printed"]]}
+	if station:
+		filters["kitchen_station"] = station
+	tickets = frappe.get_all(
+		"Kitchen Ticket",
+		filters=filters,
+		fields=[
+			"name",
+			"restaurant_order",
+			"kitchen_station",
+			"ticket_status",
+			"total_items",
+			"ticket_payload",
+			"creation",
+			"modified",
+			"owner",
+		],
+		order_by="modified asc",
+		limit_page_length=200,
+	)
+	board = {"Pending": [], "Preparing": [], "Ready": [], "Delivered": []}
+	now = now_datetime()
+	for ticket in tickets:
+		payload = frappe.parse_json(ticket.ticket_payload or "{}")
+		items = []
+		for item in payload.get("items") or []:
+			items.append(
+				{
+					"name": _menu_item_label(item.get("menu_item")),
+					"quantity": flt(item.get("quantity")),
+					"notes": item.get("notes") or "",
+				}
+			)
+		created = ticket.creation
+		elapsed_secs = int((now - created).total_seconds()) if created else 0
+		order_owner = frappe.db.get_value("Restaurant Order", ticket.restaurant_order, "owner")
+		entry = {
+			"name": ticket.name,
+			"order_number": _pos_order_display_number(payload.get("order_number") or ticket.restaurant_order),
+			"restaurant_order": ticket.restaurant_order,
+			"ticket_status": ticket.ticket_status,
+			"kitchen_station": ticket.kitchen_station,
+			"items": items,
+			"time_label": frappe.utils.format_time(created, "HH:mm") if created else "",
+			"elapsed_mmss": f"{elapsed_secs // 60:02d}:{elapsed_secs % 60:02d}",
+			"elapsed_seconds": elapsed_secs,
+			"cashier": get_fullname(order_owner or ticket.owner),
+		}
+		status_key = ticket.ticket_status
+		if status_key == "Printed":
+			status_key = "Delivered"
+		board.setdefault(status_key, []).append(entry)
+	return board
 
 
 @frappe.whitelist()
@@ -233,19 +440,37 @@ def get_open_pos_orders():
 
 @frappe.whitelist()
 def get_pos_catalog():
+	from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, serialize_menu_item
+
 	items = frappe.get_all(
 		"Menu Item",
-		filters={"is_active": 1},
-		fields=["name", "item_code", "item_name", "category", "default_price"],
+		filters={"is_active": 1, "item_type": ["in", list(POS_ITEM_TYPES)]},
+		fields=[
+			"name",
+			"item_code",
+			"item_name",
+			"item_type",
+			"category",
+			"menu_category",
+			"default_price",
+			"image",
+			"description",
+			"kitchen_station",
+			"erp_item",
+			"classification_code",
+			"is_manufactured",
+		],
 		order_by="category asc, item_name asc",
 		limit_page_length=1000,
 	)
+	offers = get_active_offers()
 	category_map: dict[str, list[dict]] = {}
 	for row in items:
-		category = row.category or "General"
+		serialized = serialize_menu_item(row, offers)
+		category = serialized["category"] or "General"
 		category_map.setdefault(category, [])
-		category_map[category].append(row)
-	return {"categories": sorted(category_map.keys()), "items_by_category": category_map}
+		category_map[category].append(serialized)
+	return {"categories": sorted(category_map.keys()), "items_by_category": category_map, "offers_count": len(offers)}
 
 
 @frappe.whitelist()
@@ -254,6 +479,8 @@ def create_pos_order(order_type: str = "Dine-in", table: str | None = None, cust
 	order.order_type = order_type
 	order.table = table
 	order.customer_profile = customer_profile
+	order.company = frappe.defaults.get_user_default("Company")
+	order.branch = frappe.defaults.get_user_default("Branch")
 	order.status = "Draft"
 	order.insert(ignore_permissions=True)
 	return {"order_name": order.name}
@@ -261,12 +488,19 @@ def create_pos_order(order_type: str = "Dine-in", table: str | None = None, cust
 
 @frappe.whitelist()
 def add_item_to_order(order_name: str, menu_item: str, qty: float | int = 1):
+	from omnexa_restaurant.pos_invoicing import line_cost_for_menu_item, line_price_for_menu_item
+
 	order = _get_editable_order(order_name)
 	qty = flt(qty or 1)
 	if qty <= 0:
 		frappe.throw(_("Quantity must be greater than zero."))
 
-	price = frappe.db.get_value("Menu Item", menu_item, "default_price") or 0
+	item_type = frappe.db.get_value("Menu Item", menu_item, "item_type") or "Product"
+	if item_type == "Raw Material":
+		frappe.throw(_("Raw materials cannot be sold from POS."))
+
+	price = line_price_for_menu_item(menu_item, qty)
+	cost = line_cost_for_menu_item(menu_item)
 	existing = None
 	for row in order.items:
 		if row.menu_item == menu_item and not (row.modifiers or row.notes):
@@ -275,8 +509,9 @@ def add_item_to_order(order_name: str, menu_item: str, qty: float | int = 1):
 	if existing:
 		existing.quantity = flt(existing.quantity) + qty
 		existing.price = price
+		existing.cost = cost
 	else:
-		order.append("items", {"menu_item": menu_item, "quantity": qty, "price": price, "cost": 0})
+		order.append("items", {"menu_item": menu_item, "quantity": qty, "price": price, "cost": cost})
 	order.status = "In Progress" if order.status == "Draft" else order.status
 	order.save(ignore_permissions=True)
 	return {"order": order.name, "items_count": len(order.items), "total_amount": order.total_amount}

@@ -122,6 +122,8 @@ permission_query_conditions = {
 	"Kitchen Station": "omnexa_restaurant.permissions.kitchen_station_query_conditions",
 	"Kitchen Printer": "omnexa_restaurant.permissions.kitchen_printer_query_conditions",
 	"Menu Item": "omnexa_restaurant.permissions.menu_item_query_conditions",
+	"Menu Category": "omnexa_restaurant.permissions.menu_category_query_conditions",
+	"Restaurant Offer": "omnexa_restaurant.permissions.restaurant_offer_query_conditions",
 	"Restaurant Recipe": "omnexa_restaurant.permissions.restaurant_recipe_query_conditions",
 	"Restaurant Order": "omnexa_restaurant.permissions.restaurant_order_query_conditions",
 	"Delivery Zone": "omnexa_restaurant.permissions.delivery_zone_query_conditions",
@@ -166,6 +168,14 @@ doc_events = {
 		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
 	},
 	"Menu Item": {
+		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+	},
+	"Menu Category": {
+		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+	},
+	"Restaurant Offer": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
 		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
 	},

@@ -9,6 +9,7 @@
 		"order_type",
 		"table",
 		"customer_profile",
+		"customer",
 		"charge_to_room",
 		"tourism_booking",
 		"column_break_omnexa_1",
@@ -35,6 +36,8 @@
 		"profit_amount",
 		"paid_amount",
 		"due_amount",
+		"sales_invoice",
+		"einvoice_status",
 		"order_owner"
 	],
 	"fields": [
@@ -73,6 +76,12 @@
 			"fieldtype": "Link",
 			"label": "Customer Profile",
 			"options": "Customer Profile"
+		},
+		{
+			"fieldname": "customer",
+			"fieldtype": "Link",
+			"label": "Customer",
+			"options": "Customer"
 		},
 		{
 			"fieldname": "charge_to_room",
@@ -213,6 +222,19 @@
 			"fieldname": "due_amount",
 			"fieldtype": "Currency",
 			"label": "Due Amount",
+			"read_only": 1
+		},
+		{
+			"fieldname": "sales_invoice",
+			"fieldtype": "Link",
+			"label": "Sales Invoice",
+			"options": "Sales Invoice",
+			"read_only": 1
+		},
+		{
+			"fieldname": "einvoice_status",
+			"fieldtype": "Data",
+			"label": "E-Invoice Status",
 			"read_only": 1
 		},
 		{

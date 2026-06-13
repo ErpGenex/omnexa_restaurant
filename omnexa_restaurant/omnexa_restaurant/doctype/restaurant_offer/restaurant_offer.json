@@ -1,0 +1,121 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:offer_name",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"offer_name",
+		"offer_type",
+		"menu_item",
+		"column_break_1",
+		"discount_percent",
+		"fixed_price",
+		"min_quantity",
+		"section_break_validity",
+		"valid_from",
+		"valid_to",
+		"column_break_2",
+		"company",
+		"branch",
+		"is_active"
+	],
+	"fields": [
+		{
+			"fieldname": "offer_name",
+			"fieldtype": "Data",
+			"label": "Offer Name",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "offer_type",
+			"fieldtype": "Select",
+			"label": "Offer Type",
+			"options": "Percent Discount\nFixed Price",
+			"default": "Percent Discount",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "menu_item",
+			"fieldtype": "Link",
+			"label": "Menu Item",
+			"options": "Menu Item",
+			"description": "Leave blank to apply to all items"
+		},
+		{
+			"fieldname": "discount_percent",
+			"fieldtype": "Percent",
+			"label": "Discount Percent",
+			"depends_on": "eval:doc.offer_type==\"Percent Discount\""
+		},
+		{
+			"fieldname": "fixed_price",
+			"fieldtype": "Currency",
+			"label": "Fixed Price",
+			"depends_on": "eval:doc.offer_type==\"Fixed Price\""
+		},
+		{
+			"fieldname": "min_quantity",
+			"fieldtype": "Float",
+			"label": "Min Quantity",
+			"default": "1"
+		},
+		{
+			"fieldname": "valid_from",
+			"fieldtype": "Date",
+			"label": "Valid From"
+		},
+		{
+			"fieldname": "valid_to",
+			"fieldtype": "Date",
+			"label": "Valid To"
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch",
+			"reqd": 1
+		},
+		{
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"label": "Is Active",
+			"default": "1"
+		},
+		{
+			"fieldname": "column_break_1",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "column_break_2",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "section_break_validity",
+			"fieldtype": "Section Break",
+			"label": "Validity"
+		}
+	],
+	"module": "Omnexa Restaurant",
+	"name": "Restaurant Offer",
+	"permissions": [
+		{
+			"role": "System Manager",
+			"read": 1,
+			"write": 1,
+			"create": 1,
+			"delete": 1
+		}
+	],
+	"track_changes": 1
+}

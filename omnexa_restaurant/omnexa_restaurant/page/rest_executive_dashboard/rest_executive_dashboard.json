@@ -1,10 +1,10 @@
 {
 	"doctype": "Page",
 	"module": "Omnexa Restaurant",
-	"name": "restaurant-pos",
-	"page_name": "restaurant-pos",
+	"name": "rest-executive-dashboard",
+	"page_name": "rest-executive-dashboard",
 	"standard": "Yes",
-	"title": "Digital Channel",
+	"title": "Executive Dashboard",
 	"roles": [
 		{
 			"role": "System Manager"

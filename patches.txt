@@ -1,0 +1,2 @@
+[post_model_sync]
+omnexa_restaurant.patches.v1_0.sync_rest_workspace_full

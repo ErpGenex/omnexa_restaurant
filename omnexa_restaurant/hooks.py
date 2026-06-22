@@ -14,7 +14,7 @@ required_apps = ["omnexa_accounting", "omnexa_customer_core"]
 add_to_apps_screen = [
 	{
 		"name": "omnexa_restaurant",
-		"logo": "/assets/omnexa_restaurant/restaurant.svg",
+		"logo": "/assets/omnexa_restaurant/logo.png",
 		"title": "Restaurant",
 		"route": "/app/restaurant",
 	}

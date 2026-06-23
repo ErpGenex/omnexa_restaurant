@@ -1,0 +1,16 @@
+{
+	"doctype": "Page",
+	"module": "Omnexa Restaurant",
+	"name": "restaurant-operations-desk",
+	"page_name": "restaurant-operations-desk",
+	"standard": "Yes",
+	"title": "Operations Desk",
+	"roles": [
+		{
+			"role": "System Manager"
+		},
+		{
+			"role": "Company Admin"
+		}
+	]
+}

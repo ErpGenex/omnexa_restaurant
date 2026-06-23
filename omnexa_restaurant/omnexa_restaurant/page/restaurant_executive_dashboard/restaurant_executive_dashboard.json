@@ -1,0 +1,16 @@
+{
+	"doctype": "Page",
+	"module": "Omnexa Restaurant",
+	"name": "restaurant-executive-dashboard",
+	"page_name": "restaurant-executive-dashboard",
+	"standard": "Yes",
+	"title": "Executive Dashboard",
+	"roles": [
+		{
+			"role": "System Manager"
+		},
+		{
+			"role": "Company Admin"
+		}
+	]
+}

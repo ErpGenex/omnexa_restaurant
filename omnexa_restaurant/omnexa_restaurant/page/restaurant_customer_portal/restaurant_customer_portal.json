@@ -1,0 +1,16 @@
+{
+	"doctype": "Page",
+	"module": "Omnexa Restaurant",
+	"name": "restaurant-customer-portal",
+	"page_name": "restaurant-customer-portal",
+	"standard": "Yes",
+	"title": "Customer Portal",
+	"roles": [
+		{
+			"role": "System Manager"
+		},
+		{
+			"role": "Company Admin"
+		}
+	]
+}

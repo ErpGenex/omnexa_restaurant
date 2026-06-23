@@ -1,0 +1,16 @@
+{
+	"doctype": "Page",
+	"module": "Omnexa Restaurant",
+	"name": "restaurant-finance-desk",
+	"page_name": "restaurant-finance-desk",
+	"standard": "Yes",
+	"title": "Finance Desk",
+	"roles": [
+		{
+			"role": "System Manager"
+		},
+		{
+			"role": "Company Admin"
+		}
+	]
+}

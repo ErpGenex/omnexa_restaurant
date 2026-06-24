@@ -3,6 +3,8 @@
 
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
 from frappe.utils import flt
 from omnexa_core.omnexa_core.branch_access import get_allowed_branches
 
@@ -51,8 +53,9 @@ def execute(filters=None):
 		row["gross_profit"] = flt(row.gross_profit)
 		s = row["total_sales"]
 		row["gross_margin_pct"] = flt(100.0 * row["gross_profit"] / s, 2) if s else 0.0
-
-	return _columns(), data
+	columns = _columns()
+	chart = auto_chart_for_columns(data, columns)
+	return columns, data, None, chart
 
 
 def _columns():

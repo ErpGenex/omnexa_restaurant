@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+	<meta charset="utf-8">
+	<title>فاتورة {{ order_number }}</title>
+	<style>
+		@page { size: 58mm auto; margin: 2mm; }
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		body {
+			width: 58mm;
+			font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+			font-size: 11px;
+			color: #111;
+			background: #fff;
+			padding: 6px 4px 10px;
+		}
+		.logo {
+			text-align: center;
+			font-size: 28px;
+			line-height: 1;
+			margin-bottom: 4px;
+		}
+		.brand-ar {
+			text-align: center;
+			font-size: 16px;
+			font-weight: 700;
+			margin-bottom: 2px;
+		}
+		.brand-en {
+			text-align: center;
+			font-size: 9px;
+			letter-spacing: 0.5px;
+			margin-bottom: 6px;
+		}
+		.meta {
+			text-align: center;
+			font-size: 10px;
+			line-height: 1.5;
+			margin-bottom: 6px;
+		}
+		.dashed, .solid {
+			border: none;
+			border-top: 1px dashed #333;
+			margin: 6px 0;
+		}
+		.solid { border-top-style: solid; }
+		.title {
+			text-align: center;
+			font-weight: 700;
+			font-size: 12px;
+			margin: 4px 0;
+		}
+		.row {
+			display: flex;
+			justify-content: space-between;
+			font-size: 10px;
+			margin-bottom: 3px;
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 10px;
+			margin-top: 4px;
+		}
+		th, td {
+			padding: 3px 1px;
+			text-align: center;
+		}
+		th {
+			border-bottom: 1px solid #333;
+			font-weight: 700;
+		}
+		td:first-child, th:first-child { text-align: right; }
+		.totals .row { margin-bottom: 4px; }
+		.grand {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			font-size: 14px;
+			font-weight: 700;
+			margin: 6px 0 2px;
+		}
+		.currency {
+			text-align: center;
+			font-size: 10px;
+			margin-bottom: 6px;
+		}
+		.thanks {
+			text-align: center;
+			font-size: 10px;
+			line-height: 1.6;
+			margin: 8px 0;
+		}
+		.qr {
+			display: flex;
+			justify-content: center;
+			margin: 8px 0 4px;
+		}
+		.qr-box {
+			width: 88px;
+			height: 88px;
+			border: 2px solid #111;
+			background:
+				linear-gradient(90deg, #111 2px, transparent 2px) 0 0 / 8px 8px,
+				linear-gradient(#111 2px, transparent 2px) 0 0 / 8px 8px;
+			opacity: 0.9;
+		}
+		.tear {
+			height: 8px;
+			margin-top: 8px;
+			background:
+				linear-gradient(135deg, transparent 6px, #fff 6px) 0 0 / 12px 12px,
+				linear-gradient(225deg, transparent 6px, #fff 6px) 0 0 / 12px 12px;
+			background-color: #ddd;
+		}
+	</style>
+</head>
+<body>
+	<div class="logo">🍴</div>
+	<div class="brand-ar">{{ restaurant_name_ar }}</div>
+	<div class="brand-en">{{ restaurant_name_en }}</div>
+	<div class="meta">
+		<div>{{ address }}</div>
+		<div>{{ phone }}</div>
+		<div>{{ cr_number }} : {{ tax_id }}</div>
+	</div>
+	<hr class="dashed">
+	<div class="title">فاتورة ضريبية مبسطة</div>
+	<div class="row"><span>التاريخ: {{ order_date }}</span><span>رقم الطلب: #{{ order_number }}</span></div>
+	<div class="row"><span>الكاشير: {{ cashier }}</span><span></span></div>
+	<hr class="solid">
+	<table>
+		<thead>
+			<tr>
+				<th>المنتج</th>
+				<th>الكمية</th>
+				<th>السعر</th>
+				<th>الإجمالي</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in items %}
+			<tr>
+				<td>{{ item.name }}</td>
+				<td>{{ "%.0f"|format(item.qty) }}</td>
+				<td>{{ "%.2f"|format(item.price) }}</td>
+				<td>{{ "%.2f"|format(item.total) }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<hr class="dashed">
+	<div class="totals">
+		<div class="row"><span>المجموع الفرعي</span><span>{{ "%.2f"|format(subtotal) }}</span></div>
+		<div class="row"><span>الضريبة (15%)</span><span>{{ "%.2f"|format(vat) }}</span></div>
+	</div>
+	<hr class="solid">
+	<div class="grand"><span>الإجمالي</span><span>{{ "%.2f"|format(grand_total) }}</span></div>
+	<div class="currency">ر.س</div>
+	<hr class="solid">
+	<div class="thanks">
+		<div>شكراً لتعاملكم معنا</div>
+		<div>نتمنى لكم وقتاً سعيداً</div>
+	</div>
+	<div class="qr">
+		{% if qr_image_base64 %}
+		<img src="data:image/png;base64,{{ qr_image_base64 }}" alt="QR" style="width:88px;height:88px;">
+		{% else %}
+		<div class="qr-box" title="QR"></div>
+		{% endif %}
+	</div>
+	{% if sales_invoice %}<div class="meta" style="margin-top:4px;">فاتورة: {{ sales_invoice }}{% if einvoice_uuid %} · UUID: {{ einvoice_uuid[:18] }}…{% endif %}</div>{% endif %}
+	<div class="tear"></div>
+</body>
+</html>

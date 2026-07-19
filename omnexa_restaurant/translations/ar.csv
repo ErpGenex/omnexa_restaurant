@@ -1,0 +1,246 @@
+Active,نشط
+Add New,إضافة جديد
+Al-Dhawaqa Restaurant,مطعم الذواقة
+All,الكل
+Allow pop-ups to print the receipt.,اسمح بالنوافذ المنبثقة لطباعة الإيصال.
+Amount,مبلغ
+Arabic Name,Arabic اسم
+Back to POS,العودة لنقطة البيع
+Both orders must belong to the same table to merge.,Both orders must belong إلى the same table إلى merge.
+Branch,الفرع
+Branch belongs to another company.,فرع belongs إلى another شركة.
+Bundle,بندل
+Bundle Components,مكونات البندل
+Bundle Items,Bundle Items
+Bundle items are required for bundle menu items.,Bundle items are required لـ bundle menu items.
+Bundles,البندلات
+Cancel,Cancel
+Cannot split all items. Keep at least one item in original order.,Cannot split all items. Keep at least one صنف in original order.
+Capacity,Capacity
+Cart is empty,السلة فارغة
+Cashier,الكاشير
+Category,الفئة
+Category Name,فئة اسم
+Charge to Room,Charge إلى Room
+Clear Order,مسح الطلب
+Coming soon,قريباً
+Company,الشركة
+Company and Branch are required.,شركة و فرع are required.
+Company is required.,شركة is required.
+Complete Order,إتمام الطلب
+Component,مكون
+Connection Type,Connection نوع
+Cost,تكلفة
+Cost Amount,تكلفة مبلغ
+Cost Center,مركز التكلفة
+Cost Impact,تكلفة Impact
+Cost of sales,تكلفة of مبيعات
+Current Order,الطلب الحالي
+Customer,العميل
+Customer Profile,ملف العميل
+Customer selected,تم اختيار العميل
+Customers,العملاء
+Date,التاريخ
+Default Price,افتراضي سعر
+Default Printer,افتراضي Printer
+Delivery Driver,Delivery Driver
+Delivery Fee,Delivery Fee
+Delivery Status,Delivery حالة
+Delivery Zone,Delivery Zone
+Description,الوصف
+Details,التفاصيل
+Device Reference,Device Reference
+Discount %,نسبة الخصم
+Discount Percent,Discount Percent
+Driver assignment is allowed for Delivery orders only.,Driver assignment is allowed لـ Delivery orders only.
+Driver Name,Driver اسم
+Driver Owner,Driver Owner
+Due Amount,استحقاق مبلغ
+Dynamic Price Enabled,Dynamic سعر Enabled
+E-Invoice Status,E - فاتورة حالة
+Edit Item,تعديل صنف
+ErpGenex Item,صنف ErpGenex
+ETA (Mins),ETA (Mins)
+Filters,Filters
+Fixed Price,سعر ثابت
+Floor,Floor
+Floor Code,Floor كود
+Floor Name,Floor اسم
+Further,Further
+Generate Kitchen Tickets,Generate Kitchen Tickets
+Gross margin %,Gross margin%
+Gross profit,Gross profit
+Hold Order,Hold Order
+Hold/Resume,Hold Resume
+Image,Image
+Ingredient,مكون
+Ingredient Item,Ingredient صنف
+Ingredients,Ingredients
+Invalid item type.,Invalid صنف نوع.
+Invalid status for kitchen ticket.,Invalid حالة لـ kitchen ticket.
+Inventory,المخزون
+IP Address,IP عنوان
+Is Active,Is نشط
+Is Manufactured,Is Manufactured
+Item,صنف
+Item Code,كود الصنف
+Item Name,اسم الصنف
+Item Profitability,صنف Profitability
+Item Type,صنف نوع
+items,أصناف
+Job Reference,Job Reference
+Kitchen & Delivery,Kitchen & Delivery
+Kitchen Display,شاشة المطبخ
+Kitchen Print Job,Kitchen Print Job
+Kitchen Print Template,Kitchen Print Template
+Kitchen Printer,Kitchen Printer
+Kitchen Station,Kitchen Station
+Kitchen Station Performance,Kitchen Station أداء
+Kitchen Ticket,Kitchen Ticket
+Kitchen tickets generated.,Kitchen tickets generated.
+Layout JSON,Layout JSON
+Leave blank for all,اتركه فارغاً للكل
+Leave blank to apply to all items,Leave blank إلى apply إلى all items
+Line Amount,Line مبلغ
+Line Cost,Line تكلفة
+Line Reference,Line Reference
+Load omnexa_core vertical portal desk,Load omnexa أساسي vertical بوابة desk
+Load omnexa_core vertical workcenter kit,Load omnexa أساسي vertical workcenter kit
+Logout,تسجيل خروج
+Master Data,Master بيانات
+Menu Category,Menu فئة
+Menu Item,صنف القائمة
+Menu Item Bundle Line,Menu صنف Bundle Line
+Min Quantity,Min Quantity
+Mobile No,Mobile No
+Modifiers,Modifiers
+Name,الاسم
+New Item,صنف جديد
+New Offer,عرض جديد
+No items,لا توجد أصناف
+No matching item rows found for split operation.,No matching صنف rows found لـ split operation.
+No menu items found.,لا توجد أصناف.
+No offers,No offers
+No tickets,لا توجد تذاكر
+Notes,Notes
+Offer,عرض
+Offer Name,اسم العرض
+Offer Type,Offer نوع
+Offers,العروض
+Omnexa Restaurant,Omnexa مطعم
+Operations,العمليات
+optional,اختياري
+Order completed,تم إتمام الطلب
+Order has no items.,Order has no items.
+Order is already submitted.,Order is already submitted.
+Order Items,Order Items
+Order must be in draft state for this operation.,Order must be in مسودة state لـ this operation.
+Order No,رقم الطلب
+Order Owner,Order Owner
+Order Type,Order نوع
+Orders,الطلبات
+Overview,نظرة عامة
+Paid Amount,مدفوع مبلغ
+Payload,Payload
+Payment Mode,دفعة Mode
+Payment Reference,دفعة Reference
+Payments,Payments
+Percent Discount,خصم نسبة
+Period (YYYY-MM),Period (YYYY - MM)
+Posting Date,Posting تاريخ
+Preparation Time (Mins),Preparation Time (Mins)
+Previous Orders,الطلبات السابقة
+Price,السعر
+Primary and secondary order cannot be the same.,Primary و secondary order cannot be the same.
+Printed On,Printed On
+Printer Name,Printer اسم
+Product,منتج
+Product Management,إدارة المنتجات
+Products,المنتجات
+Profit,Profit
+Profit Amount,Profit مبلغ
+QR Code,QR كود
+Qty,Qty
+Qty Sold,Qty Sold
+Quantity,Quantity
+Quantity must be greater than zero.,Quantity must be greater than zero.
+Raw Material,مادة خام
+Raw Materials,الخامات
+Raw materials cannot be sold from POS.,Raw materials cannot be sold from POS.
+Raw materials should not have a selling price on the menu.,Raw materials should not have a selling سعر on the menu.
+Reason,Reason
+Recipe Ingredients (ErpGenex Items),مكونات الوصفة (أصناف ErpGenex)
+Recipe Owner,Recipe Owner
+Reference No,Reference No
+Reports,تقارير
+rest-executive-dashboard,rest - تنفيذي - لوحة معلومات
+Restaurant,مطعم
+Restaurant Floor,مطعم Floor
+Restaurant Offer,مطعم Offer
+Restaurant Order,مطعم Order
+Restaurant Order Item,مطعم Order صنف
+Restaurant Payment Entry,مطعم دفعة قيد
+Restaurant POS,نقطة البيع
+Restaurant Recipe,مطعم Recipe
+Restaurant Recipe Item,مطعم Recipe صنف
+Restaurant Sales Summary,مطعم مبيعات ملخص
+Restaurant Table,مطعم Table
+Restaurant Workcenter,مطعم Workcenter
+restaurant-analytics-dashboard,مطعم - تحليلات - لوحة معلومات
+restaurant-customer-portal,مطعم - عميل - بوابة
+restaurant-executive-dashboard,مطعم - تنفيذي - لوحة معلومات
+restaurant-finance-desk,مطعم - مالية - desk
+restaurant-operations-desk,مطعم - عمليات - desk
+Revenue,الإيرادات
+Sales,المبيعات
+Sales Invoice,فاتورة مبيعات
+Save,Save
+Saved,تم الحفظ
+Search for a product...,بحث عن منتج...
+Search products...,بحث في المنتجات...
+Select at least one item row to split.,Select at least one صنف row إلى split.
+Select Customer,اختيار عميل
+Selected order row was not found.,Selected order row was not found.
+Service,خدمة
+Services,الخدمات
+Settings,الإعدادات
+Sort Order,Sort Order
+Sound,الصوت
+Split quantity must be less than existing row quantity.,Split quantity must be less than existing row quantity.
+Station Owner,Station Owner
+Status,الحالة
+Stock / accounting item in ErpGenex linked to this menu item,Stock محاسبة صنف in Erp Genex linked إلى this menu صنف
+Subtotal,المجموع الفرعي
+Table Code,Table كود
+Table Number,Table رقم
+Tax Classification Code,Tax Classification كود
+Tax Code,كود ضريبي
+Template Owner,Template Owner
+Template Text,Template Text
+Ticket Payload,Ticket Payload
+Ticket Reference,Ticket Reference
+Ticket Status,Ticket حالة
+Tips,Tips
+Tips Amount,Tips مبلغ
+Total,الإجمالي
+Total Amount,إجمالي مبلغ
+Total Items,إجمالي Items
+Total Qty,إجمالي Qty
+Total Sales,إجمالي مبيعات
+Tourism Booking,سياحة Booking
+Tourism Guest Folio,سياحة Guest Folio
+Tourism Service Order,سياحة خدمة Order
+Type,النوع
+Upload Image,رفع صورة
+Valid From,Valid From
+Valid To,Valid إلى
+Validity,Validity
+Value,Value
+VAT (15%),الضريبة (15%)
+Waste %,Waste%
+Waste Analysis,Waste Analysis
+Waste Log,Waste سجل
+Waste Owner,Waste Owner
+Yield,Yield
+Zone Code,Zone كود
+Zone Name,Zone اسم

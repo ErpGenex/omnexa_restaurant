@@ -1,0 +1,37 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["menu_item", "item_name", "quantity"],
+	"fields": [
+		{
+			"fieldname": "menu_item",
+			"fieldtype": "Link",
+			"label": "Menu Item",
+			"options": "Menu Item",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "item_name",
+			"fieldtype": "Data",
+			"label": "Item Name",
+			"fetch_from": "menu_item.item_name",
+			"read_only": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "quantity",
+			"fieldtype": "Float",
+			"label": "Quantity",
+			"default": "1",
+			"reqd": 1,
+			"in_list_view": 1
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Restaurant",
+	"name": "Menu Item Bundle Line",
+	"permissions": []
+}

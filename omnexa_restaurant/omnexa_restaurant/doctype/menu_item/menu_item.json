@@ -1,0 +1,182 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:item_code",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"tab_break_overview",
+		"item_code",
+		"item_name",
+		"item_type",
+		"category",
+		"menu_category",
+		"column_break_omnexa_1",
+		"image",
+		"default_price",
+		"is_active",
+		"description",
+		"tab_break_details",
+		"erp_item",
+		"is_manufactured",
+		"kitchen_station",
+		"dynamic_price_enabled",
+		"classification_code",
+		"column_break_omnexa_2",
+		"company",
+		"branch",
+		"tab_break_bundle",
+		"bundle_items"
+	],
+	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_details",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
+		{
+			"fieldname": "tab_break_bundle",
+			"fieldtype": "Tab Break",
+			"label": "Bundle",
+			"depends_on": "eval:doc.item_type==\"Bundle\""
+		},
+		{
+			"fieldname": "item_code",
+			"fieldtype": "Data",
+			"label": "Item Code",
+			"reqd": 1,
+			"unique": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "item_name",
+			"fieldtype": "Data",
+			"label": "Item Name",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "item_type",
+			"fieldtype": "Select",
+			"label": "Item Type",
+			"options": "Product\nService\nRaw Material\nBundle",
+			"default": "Product",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "category",
+			"fieldtype": "Data",
+			"label": "Category",
+			"in_list_view": 1
+		},
+		{
+			"fieldname": "menu_category",
+			"fieldtype": "Link",
+			"label": "Menu Category",
+			"options": "Menu Category"
+		},
+		{
+			"fieldname": "image",
+			"fieldtype": "Attach Image",
+			"label": "Image"
+		},
+		{
+			"fieldname": "description",
+			"fieldtype": "Small Text",
+			"label": "Description"
+		},
+		{
+			"fieldname": "is_manufactured",
+			"fieldtype": "Check",
+			"label": "Is Manufactured",
+			"default": "0"
+		},
+		{
+			"fieldname": "default_price",
+			"fieldtype": "Currency",
+			"label": "Default Price",
+			"default": "0"
+		},
+		{
+			"fieldname": "kitchen_station",
+			"fieldtype": "Link",
+			"label": "Kitchen Station",
+			"options": "Kitchen Station"
+		},
+		{
+			"fieldname": "dynamic_price_enabled",
+			"fieldtype": "Check",
+			"label": "Dynamic Price Enabled",
+			"default": "0"
+		},
+		{
+			"fieldname": "erp_item",
+			"fieldtype": "Link",
+			"label": "ErpGenex Item",
+			"options": "Item",
+			"description": "Stock / accounting item in ErpGenex linked to this menu item"
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch",
+			"reqd": 1
+		},
+		{
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"label": "Is Active",
+			"default": "1"
+		},
+		{
+			"fieldname": "classification_code",
+			"fieldtype": "Data",
+			"label": "Tax Classification Code"
+		},
+		{
+			"fieldname": "bundle_items",
+			"fieldtype": "Table",
+			"label": "Bundle Items",
+			"options": "Menu Item Bundle Line"
+		},
+		{
+			"fieldname": "column_break_omnexa_1",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "column_break_omnexa_2",
+			"fieldtype": "Column Break"
+		}
+	],
+	"module": "Omnexa Restaurant",
+	"name": "Menu Item",
+	"permissions": [
+		{
+			"role": "System Manager",
+			"read": 1,
+			"write": 1,
+			"create": 1,
+			"delete": 1,
+			"print": 1,
+			"email": 1,
+			"export": 1,
+			"report": 1,
+			"share": 1
+		}
+	],
+	"track_changes": 1
+}

@@ -22,7 +22,8 @@ def execute():
 	)
 	if not company:
 		return
-	branches = frappe.get_all("Branch", filters={"company": company}, pluck="name") or [None]
+	branches = frappe.get_all("Branch", filters={"company": company
+	}, pluck="name") or [None]
 	for branch in branches:
 		for en_name, ar_name, sort_order in DEFAULT_CATEGORIES:
 			if frappe.db.exists("Menu Category", en_name):
@@ -35,8 +36,8 @@ def execute():
 					"sort_order": sort_order,
 					"company": company,
 					"branch": branch,
-					"is_active": 1,
-				}
+					"is_active": 1
+	}
 			)
 			doc.insert(ignore_permissions=True)
 	frappe.db.commit()

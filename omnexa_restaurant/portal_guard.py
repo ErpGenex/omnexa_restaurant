@@ -22,13 +22,12 @@ PORTAL_WORKSPACE_SPECS: dict[str, dict] = {
 		"name": "restaurant-ws-customer",
 		"title": "Restaurant Customer Hub",
 		"label": "Customer Portal",
-		"icon": "restaurant-customer",
-	},
+		"icon": "icon"
+}
 }
 
 CUSTOMER_ALLOWED_PAGES = frozenset(
-	{
-		"restaurant-customer-portal",
+	{"restaurant-customer-portal",
 	}
 )
 
@@ -78,7 +77,7 @@ def extend_bootinfo(bootinfo):
 		"portal_role": role,
 		"home_route": PORTAL_HOME_ROUTES[role],
 		"allowed_pages": sorted(portal_allowed_pages(role)),
-		"allowed_doctypes": sorted(portal_allowed_doctypes(role)),
+		"allowed_doctypes": sorted(portal_allowed_doctypes(role))
 	}
 
 
@@ -94,6 +93,7 @@ def ensure_restaurant_workspace_portal_roles() -> dict:
 		ws.set("roles", [])
 		for role in staff_roles:
 			ws.append("roles", {"role": role})
+
 		ws.flags.ignore_permissions = True
 		ws.save()
 		stats["restaurant_roles_set"] = len(staff_roles)
@@ -132,8 +132,8 @@ def _ensure_portal_workspace(role: str, links: list[tuple]) -> bool:
 				"module": "Omnexa Restaurant",
 				"icon": spec["icon"],
 				"public": 0,
-				"is_hidden": 0,
-			}
+			"is_hidden": 0
+	}
 		)
 	ws.set("roles", [])
 	ws.append("roles", {"role": role})
@@ -148,26 +148,25 @@ def _ensure_portal_workspace(role: str, links: list[tuple]) -> bool:
 				"label": link_label,
 				"hidden": 0,
 				"onboard": 0,
-				"is_query_report": 0,
-			},
+			"is_query_report": 0
+	},
 		)
 	shortcuts = []
 	content = [{"id": "hdr", "type": "header", "data": {"text": f"<b>{spec['label']}</b>", "col": 12}}]
 	for idx, (_lt, link_to, link_label) in enumerate(links):
 		shortcuts.append(
-			{
-				"type": "DocType" if _lt == "DocType" else "Page",
-				"link_to": link_to,
-				"label": link_label,
-				"color": "Blue",
-			}
+		{
+		"type": "DocType" if _lt == "DocType" else "Page",
+		"link_to": link_to,
+		"label": link_label,
+		"color": "Blue"
+		}
 		)
 		content.append(
-			{
-				"id": f"sc{idx}",
-				"type": "shortcut",
-				"data": {"shortcut_name": link_label, "col": 4},
-			}
+		{"id": f"sc{idx}",
+		"type": "shortcut",
+		"data": {"shortcut_name": link_label, "col": 4}
+		}
 		)
 	ws.shortcuts = []
 	for sc in shortcuts:

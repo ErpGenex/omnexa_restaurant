@@ -20,7 +20,8 @@ class MenuItem(Document):
 		if self.category and not self.menu_category:
 			match = frappe.db.get_value(
 				"Menu Category",
-				{"category_name": self.category, "company": self.company, "branch": self.branch},
+				{"category_name": self.category, "company": self.company, "branch": self.branch
+	},
 				"name",
 			)
 			if match:

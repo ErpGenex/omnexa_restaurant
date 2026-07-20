@@ -54,8 +54,12 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Branch"), "fieldname": "branch", "fieldtype": "Link", "options": "Branch", "width": 140},
-		{"label": _("Date"), "fieldname": "sales_date", "fieldtype": "Date", "width": 120},
-		{"label": _("Orders"), "fieldname": "orders_count", "fieldtype": "Int", "width": 90},
-		{"label": _("Revenue"), "fieldname": "total_sales", "fieldtype": "Currency", "width": 140},
+		{"label": _("Branch"), "fieldname": "branch", "fieldtype": "Link", "options": "Branch", "width": 140
+	},
+		{"label": _("Date"), "fieldname": "sales_date", "fieldtype": "Date", "width": 120
+	},
+		{"label": _("Orders"), "fieldname": "orders_count", "fieldtype": "Int", "width": 90
+	},
+		{"label": _("Revenue"), "fieldname": "total_sales", "fieldtype": "Currency", "width": 140
+	},
 	]

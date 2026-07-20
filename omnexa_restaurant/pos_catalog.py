@@ -14,6 +14,17 @@ from frappe.utils import flt, getdate, today
 POS_ITEM_TYPES = ("Product", "Service", "Bundle")
 
 
+def menu_item_has_field(fieldname: str) -> bool:
+	try:
+		return frappe.get_meta("Menu Item").has_field(fieldname) and frappe.db.has_column("Menu Item", fieldname)
+	except Exception:
+		return False
+
+
+def get_menu_item_type(menu_item) -> str:
+	return getattr(menu_item, "item_type", None) or "Product"
+
+
 def menu_item_image_url(image: str | None) -> str | None:
 	if not image:
 		return None
@@ -25,7 +36,8 @@ def menu_item_image_url(image: str | None) -> str | None:
 def menu_item_unit_cost(menu_item_name: str) -> float:
 	recipe_name = frappe.db.get_value(
 		"Restaurant Recipe",
-		{"menu_item": menu_item_name, "is_active": 1},
+		{"menu_item": menu_item_name, "is_active": 1
+	},
 		"name",
 	)
 	if not recipe_name:
@@ -41,7 +53,8 @@ def menu_item_unit_cost(menu_item_name: str) -> float:
 
 
 def get_active_offers(company: str | None = None, branch: str | None = None) -> list[dict[str, Any]]:
-	filters: dict[str, Any] = {"is_active": 1}
+	filters: dict[str, Any] = {"is_active": 1
+	}
 	if company:
 		filters["company"] = company
 	if branch:
@@ -103,8 +116,9 @@ def resolve_effective_price(
 def expand_bundle_lines(menu_item_name: str, qty: float = 1) -> list[dict[str, Any]]:
 	"""Kitchen / costing view of bundle components."""
 	menu = frappe.get_doc("Menu Item", menu_item_name)
-	if menu.item_type != "Bundle":
-		return [{"menu_item": menu_item_name, "quantity": qty, "item_name": menu.item_name}]
+	if get_menu_item_type(menu) != "Bundle":
+		return [{"menu_item": menu_item_name, "quantity": qty, "item_name": menu.item_name
+	}]
 	lines: list[dict[str, Any]] = []
 	for row in menu.bundle_items or []:
 		child = frappe.db.get_value("Menu Item", row.menu_item, "item_name") or row.menu_item
@@ -112,10 +126,11 @@ def expand_bundle_lines(menu_item_name: str, qty: float = 1) -> list[dict[str, A
 			{
 				"menu_item": row.menu_item,
 				"quantity": flt(row.quantity) * flt(qty),
-				"item_name": child,
-			}
+				"item_name": child
+	}
 		)
-	return lines or [{"menu_item": menu_item_name, "quantity": qty, "item_name": menu.item_name}]
+	return lines or [{"menu_item": menu_item_name, "quantity": qty, "item_name": menu.item_name
+	}]
 
 
 def serialize_menu_item(row: dict[str, Any], offers: list[dict[str, Any]] | None = None) -> dict[str, Any]:
@@ -136,5 +151,5 @@ def serialize_menu_item(row: dict[str, Any], offers: list[dict[str, Any]] | None
 		"kitchen_station": row.get("kitchen_station"),
 		"erp_item": row.get("erp_item"),
 		"classification_code": row.get("classification_code"),
-		"is_manufactured": row.get("is_manufactured"),
+		"is_manufactured": row.get("is_manufactured")
 	}

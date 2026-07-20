@@ -60,11 +60,18 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Branch"), "fieldname": "branch", "fieldtype": "Link", "options": "Branch", "width": 140},
-		{"label": _("Period (YYYY-MM)"), "fieldname": "period", "fieldtype": "Data", "width": 110},
-		{"label": _("Orders"), "fieldname": "orders_count", "fieldtype": "Int", "width": 90},
-		{"label": _("Revenue"), "fieldname": "total_sales", "fieldtype": "Currency", "width": 130},
-		{"label": _("Cost of sales"), "fieldname": "total_cost", "fieldtype": "Currency", "width": 130},
-		{"label": _("Gross profit"), "fieldname": "gross_profit", "fieldtype": "Currency", "width": 130},
-		{"label": _("Gross margin %"), "fieldname": "gross_margin_pct", "fieldtype": "Float", "width": 110},
+		{"label": _("Branch"), "fieldname": "branch", "fieldtype": "Link", "options": "Branch", "width": 140
+	},
+		{"label": _("Period (YYYY-MM)"), "fieldname": "period", "fieldtype": "Data", "width": 110
+	},
+		{"label": _("Orders"), "fieldname": "orders_count", "fieldtype": "Int", "width": 90
+	},
+		{"label": _("Revenue"), "fieldname": "total_sales", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Cost of sales"), "fieldname": "total_cost", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Gross profit"), "fieldname": "gross_profit", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Gross margin %"), "fieldname": "gross_margin_pct", "fieldtype": "Float", "width": 110
+	},
 	]

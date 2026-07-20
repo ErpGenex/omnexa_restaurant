@@ -12,7 +12,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt
 
-from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, serialize_menu_item
+from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, menu_item_has_field, serialize_menu_item
 from omnexa_restaurant.pos_invoicing import ensure_erp_item_for_menu_item
 
 
@@ -26,7 +26,8 @@ def _default_company_branch() -> tuple[str | None, str | None]:
 def get_menu_categories(company: str | None = None, branch: str | None = None):
 	company = company or _default_company_branch()[0]
 	branch = branch or _default_company_branch()[1]
-	filters: dict[str, Any] = {"is_active": 1}
+	filters: dict[str, Any] = {"is_active": 1
+	}
 	if company:
 		filters["company"] = company
 	if branch:
@@ -52,27 +53,30 @@ def get_menu_items_for_manager(
 		filters["company"] = company
 	if branch:
 		filters["branch"] = branch
-	if item_type and item_type != "All":
+	has_item_type = menu_item_has_field("item_type")
+	if has_item_type and item_type and item_type != "All":
 		filters["item_type"] = item_type
+	fields = [
+		"name",
+		"item_code",
+		"item_name",
+		"category",
+		"menu_category",
+		"default_price",
+		"image",
+		"description",
+		"is_active",
+		"erp_item",
+		"kitchen_station",
+		"classification_code",
+		"is_manufactured",
+	]
+	if has_item_type:
+		fields.insert(3, "item_type")
 	rows = frappe.get_all(
 		"Menu Item",
 		filters=filters,
-		fields=[
-			"name",
-			"item_code",
-			"item_name",
-			"item_type",
-			"category",
-			"menu_category",
-			"default_price",
-			"image",
-			"description",
-			"is_active",
-			"erp_item",
-			"kitchen_station",
-			"classification_code",
-			"is_manufactured",
-		],
+		fields=fields,
 		order_by="item_name asc",
 		limit_page_length=500,
 	)
@@ -88,7 +92,8 @@ def get_menu_item_detail(name: str):
 	doc = frappe.get_doc("Menu Item", name)
 	recipe = frappe.db.get_value(
 		"Restaurant Recipe",
-		{"menu_item": name, "is_active": 1},
+		{"menu_item": name, "is_active": 1
+	},
 		["name", "yield_qty", "preparation_time_mins"],
 		as_dict=True,
 	)
@@ -96,20 +101,22 @@ def get_menu_item_detail(name: str):
 	if recipe and recipe.name:
 		ingredients = frappe.get_all(
 			"Restaurant Recipe Item",
-			filters={"parent": recipe.name},
+			filters={"parent": recipe.name
+	},
 			fields=["ingredient_item", "qty", "waste_percentage"],
 		)
 	return {
 		**serialize_menu_item(doc.as_dict()),
 		"bundle_items": [
-			{"menu_item": r.menu_item, "item_name": r.item_name, "quantity": r.quantity}
+			{"menu_item": r.menu_item, "item_name": r.item_name, "quantity": r.quantity
+	}
 			for r in (doc.bundle_items or [])
 		],
 		"recipe": recipe,
 		"ingredients": ingredients,
 		"company": doc.company,
 		"branch": doc.branch,
-		"is_active": doc.is_active,
+		"is_active": doc.is_active
 	}
 
 
@@ -150,7 +157,8 @@ def save_menu_item(payload_json: str):
 			continue
 		doc.append(
 			"bundle_items",
-			{"menu_item": row.get("menu_item"), "quantity": flt(row.get("quantity") or 1)},
+			{"menu_item": row.get("menu_item"), "quantity": flt(row.get("quantity") or 1)
+	},
 		)
 
 	doc.flags.ignore_permissions = True
@@ -172,7 +180,8 @@ def _save_recipe_from_payload(menu_item_name: str, data: dict[str, Any]) -> None
 	ingredients = data.get("ingredients") or []
 	if not ingredients:
 		return
-	recipe_name = frappe.db.get_value("Restaurant Recipe", {"menu_item": menu_item_name}, "name")
+	recipe_name = frappe.db.get_value("Restaurant Recipe", {"menu_item": menu_item_name
+	}, "name")
 	if recipe_name:
 		recipe = frappe.get_doc("Restaurant Recipe", recipe_name)
 	else:
@@ -192,8 +201,8 @@ def _save_recipe_from_payload(menu_item_name: str, data: dict[str, Any]) -> None
 			{
 				"ingredient_item": row.get("ingredient_item"),
 				"qty": flt(row.get("qty") or 1),
-				"waste_percentage": flt(row.get("waste_percentage") or 0),
-			},
+				"waste_percentage": flt(row.get("waste_percentage") or 0)
+	},
 		)
 	recipe.flags.ignore_permissions = True
 	if recipe.get("__islocal") or not recipe.name:
@@ -205,7 +214,8 @@ def _save_recipe_from_payload(menu_item_name: str, data: dict[str, Any]) -> None
 @frappe.whitelist()
 def toggle_menu_item_active(name: str, is_active: int | str = 1):
 	frappe.db.set_value("Menu Item", name, "is_active", cint(is_active))
-	return {"name": name, "is_active": cint(is_active)}
+	return {"name": name, "is_active": cint(is_active)
+	}
 
 
 @frappe.whitelist()

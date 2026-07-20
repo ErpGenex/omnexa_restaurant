@@ -62,11 +62,12 @@ def create_tourism_service_order_from_restaurant_order(order_doc):
 			"service_date": nowdate(),
 			"reference_doctype": "Restaurant Order",
 			"reference_name": order_doc.name,
-			"description": f"Restaurant order {order_doc.name}",
+			"description": f"Restaurant order {order_doc.name
+	}",
 			"quantity": 1,
 			"rate": amount,
-			"status": "Billed",
-		}
+			"status": "Billed"
+	}
 	)
 	service_order.insert(ignore_permissions=True)
 
@@ -75,8 +76,8 @@ def create_tourism_service_order_from_restaurant_order(order_doc):
 		order_doc.name,
 		{
 			"tourism_service_order": service_order.name,
-			"tourism_guest_folio": service_order.folio,
-		},
+			"tourism_guest_folio": service_order.folio
+	},
 		update_modified=False,
 	)
 	return service_order.name

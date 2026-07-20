@@ -1,0 +1,14 @@
+{
+ "item_code": "Restaurant Links",
+ "item_name": "Restaurant Links",
+ "module": "Omnexa Restaurant",
+ "page_name": "links",
+ "route": "links",
+ "is_standard": 1,
+ "published": 1,
+ "roles": [
+  "System Manager",
+  "Restaurant Administrator",
+  "Restaurant Staff"
+ ]
+}

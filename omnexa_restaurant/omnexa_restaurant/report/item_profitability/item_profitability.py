@@ -17,11 +17,16 @@ from omnexa_core.omnexa_core.report_print.report_query_filters import (
 
 def execute(filters=None):
 	columns = [
-		{"label": _("Menu Item"), "fieldname": "menu_item", "fieldtype": "Link", "options": "Menu Item", "width": 180},
-		{"label": _("Qty Sold"), "fieldname": "qty_sold", "fieldtype": "Float", "width": 90},
-		{"label": _("Sales"), "fieldname": "sales_amount", "fieldtype": "Currency", "width": 130},
-		{"label": _("Cost"), "fieldname": "cost_amount", "fieldtype": "Currency", "width": 130},
-		{"label": _("Profit"), "fieldname": "profit_amount", "fieldtype": "Currency", "width": 130},
+		{"label": _("Menu Item"), "fieldname": "menu_item", "fieldtype": "Link", "options": "Menu Item", "width": 180
+	},
+		{"label": _("Qty Sold"), "fieldname": "qty_sold", "fieldtype": "Float", "width": 90
+	},
+		{"label": _("Sales"), "fieldname": "sales_amount", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Cost"), "fieldname": "cost_amount", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Profit"), "fieldname": "profit_amount", "fieldtype": "Currency", "width": 130
+	},
 	]
 	filters = prepare_filters(filters)
 	conditions, params = sql_conditions(filters, "Restaurant Order Item", date_field="creation", company=True, branch=True)

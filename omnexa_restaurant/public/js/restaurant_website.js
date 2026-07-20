@@ -105,11 +105,11 @@
 			try {
 				if (typeof frappe !== "undefined" && frappe.call) {
 					const r = await frappe.call({
-						method: "omnexa_restaurant.api.public_restaurant_site.get_site_config",
+						method: "omnexa_restaurant.api.get_site_config",
 					});
 					this.config = Object.assign(this.defaultConfig(), r.message || {});
 				} else {
-					const res = await fetch("/api/method/omnexa_restaurant.api.public_restaurant_site.get_site_config");
+					const res = await fetch("/api/method/omnexa_restaurant.api.get_site_config");
 					const data = await res.json();
 					this.config = Object.assign(this.defaultConfig(), data.message || {});
 				}

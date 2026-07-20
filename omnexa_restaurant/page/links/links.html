@@ -1,0 +1,66 @@
+{% extends "templates/base.html" %}
+
+{% block title %}روابط المطاعم | Restaurant Links{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">روابط المطاعم | Restaurant Links</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">🌐 موقع المطعم العام | Public Website</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">الموقع العام للمطعم - متاح للجميع</p>
+                    <a href="/restaurant/" target="_blank" class="btn btn-primary btn-lg">
+                        <i class="fa fa-external-link"></i> زيارة الموقع | Visit Website
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">👤 بوابة العميل | Customer Portal</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">بوابة خاصة للعملاء للطلب أونلاين</p>
+                    <a href="/app/restaurant-customer-portal/" target="_blank" class="btn btn-success btn-lg">
+                        <i class="fa fa-user"></i> دخول البوابة | Access Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">📋 معلومات إضافية | Additional Information</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>رابط الموقع:</strong> <code>{{ frappe.request.host_url }}restaurant/</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>بوابة العميل:</strong> <code>{{ frappe.request.host_url }}app/restaurant-customer-portal/</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>الدور المطلوب:</strong> <code>Restaurant Customer Portal</code>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

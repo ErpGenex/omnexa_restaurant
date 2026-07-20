@@ -18,14 +18,15 @@ WALKIN_CUSTOMER_NAME = "Restaurant Walk-in Customer"
 
 
 def ensure_walkin_customer(company: str) -> str:
-	existing = frappe.db.get_value("Customer", {"customer_name": WALKIN_CUSTOMER_NAME, "company": company}, "name")
+	existing = frappe.db.get_value("Customer", {"customer_name": WALKIN_CUSTOMER_NAME, "company": company
+	}, "name")
 	if existing:
 		return existing
 	meta = frappe.get_meta("Customer")
 	payload: dict[str, Any] = {
 		"doctype": "Customer",
 		"customer_name": WALKIN_CUSTOMER_NAME,
-		"company": company,
+		"company": company
 	}
 	if meta.has_field("status"):
 		payload["status"] = "Active"
@@ -53,11 +54,12 @@ def ensure_erp_item_for_menu_item(menu_item) -> str:
 	item_code = (menu_item.item_code or menu_item.name).strip()
 	if frappe.db.exists("Item", item_code):
 		return item_code
-	item_group = "Services" if menu_item.item_type == "Service" else "Products"
+	item_type = getattr(menu_item, "item_type", None) or "Product"
+	item_group = "Services" if item_type == "Service" else "Products"
 	if not frappe.db.exists("Item Group", item_group):
 		item_group = frappe.db.get_value("Item Group", {}, "name") or "All Item Groups"
-	is_stock = 1 if menu_item.item_type in ("Product", "Raw Material") else 0
-	is_sales = 1 if menu_item.item_type in ("Product", "Service", "Bundle") else 0
+	is_stock = 1 if item_type in ("Product", "Raw Material") else 0
+	is_sales = 1 if item_type in ("Product", "Service", "Bundle") else 0
 	item = frappe.get_doc(
 		{
 			"doctype": "Item",
@@ -67,10 +69,10 @@ def ensure_erp_item_for_menu_item(menu_item) -> str:
 			"stock_uom": "Nos",
 			"is_stock_item": is_stock,
 			"is_sales_item": is_sales,
-			"is_purchase_item": menu_item.item_type == "Raw Material",
+			"is_purchase_item": item_type == "Raw Material",
 			"description": menu_item.description or menu_item.item_name,
-			"standard_rate": flt(menu_item.default_price),
-		}
+			"standard_rate": flt(menu_item.default_price)
+	}
 	)
 	item.insert(ignore_permissions=True)
 	return item.name
@@ -89,7 +91,8 @@ def _tax_template_for_branch(branch: str | None) -> str | None:
 	country = frappe.db.get_value("Branch", branch, "country_code") or ""
 	if country in ("SA", "SAU", "Saudi Arabia"):
 		for title in ("VAT 15% - S", "VAT 15%", "Standard VAT 15%"):
-			name = frappe.db.get_value("Sales Taxes and Charges Template", {"title": title, "company": frappe.defaults.get_user_default("Company")}, "name")
+			name = frappe.db.get_value("Sales Taxes and Charges Template", {"title": title, "company": frappe.defaults.get_user_default("Company")
+	}, "name")
 			if name:
 				return name
 	return None
@@ -98,7 +101,8 @@ def _tax_template_for_branch(branch: str | None) -> str | None:
 def create_sales_invoice_from_restaurant_order(order_name: str) -> dict[str, Any]:
 	order = frappe.get_doc("Restaurant Order", order_name)
 	if order.sales_invoice and frappe.db.exists("Sales Invoice", order.sales_invoice):
-		return {"sales_invoice": order.sales_invoice, "created": False}
+		return {"sales_invoice": order.sales_invoice, "created": False
+	}
 
 	customer = order.customer or ensure_walkin_customer(order.company)
 	si = frappe.new_doc("Sales Invoice")
@@ -142,14 +146,14 @@ def create_sales_invoice_from_restaurant_order(order_name: str) -> dict[str, Any
 		{
 			"sales_invoice": si.name,
 			"customer": customer,
-			"einvoice_status": einvoice_result.get("status") or einvoice_result.get("authority_status") or "Submitted",
-		},
+			"einvoice_status": einvoice_result.get("status") or einvoice_result.get("authority_status") or "Submitted"
+	},
 		update_modified=False,
 	)
 	return {
 		"sales_invoice": si.name,
 		"created": True,
-		"einvoice": einvoice_result,
+		"einvoice": einvoice_result
 	}
 
 
@@ -158,20 +162,23 @@ def dispatch_einvoice_for_sales_invoice(si) -> dict[str, Any]:
 	if isinstance(si, str):
 		si = frappe.get_doc("Sales Invoice", si)
 	if "omnexa_einvoice" not in frappe.get_installed_apps():
-		return {"status": "skipped", "reason": "omnexa_einvoice not installed"}
+		return {"status": "skipped", "reason": "omnexa_einvoice not installed"
+	}
 	try:
 		from omnexa_einvoice.tax_engine.dispatch import dispatch_tax_for_document
 
 		return dispatch_tax_for_document("Sales Invoice", si.name, branch=getattr(si, "branch", None))
 	except Exception as exc:
 		frappe.log_error(frappe.get_traceback(), "Restaurant POS e-invoice dispatch")
-		return {"status": "error", "message": str(exc)}
+		return {"status": "error", "message": str(exc)
+	}
 
 
 def get_einvoice_receipt_context(order_name: str) -> dict[str, Any]:
 	"""QR and tax metadata for thermal receipt."""
 	order = frappe.get_doc("Restaurant Order", order_name)
-	out: dict[str, Any] = {"qr_image_base64": "", "uuid": "", "sales_invoice": order.sales_invoice or ""}
+	out: dict[str, Any] = {"qr_image_base64": "", "uuid": "", "sales_invoice": order.sales_invoice or ""
+	}
 	if not order.sales_invoice:
 		return out
 	if "omnexa_einvoice" not in frappe.get_installed_apps():

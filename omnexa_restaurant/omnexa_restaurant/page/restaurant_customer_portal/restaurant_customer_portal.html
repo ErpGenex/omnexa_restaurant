@@ -1,0 +1,331 @@
+{% extends "templates/base.html" %}
+
+{% block title %}{{ _("Customer Portal") }} - Omnexa Restaurant{% endblock %}
+
+{% block style %}
+<style>
+	.customer-portal {
+		padding: 24px;
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+	.portal-header {
+		background: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+		color: white;
+		padding: 32px;
+		border-radius: 16px;
+		margin-bottom: 32px;
+	}
+	.portal-stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 16px;
+		margin-bottom: 32px;
+	}
+	.stat-card {
+		background: white;
+		padding: 24px;
+		border-radius: 12px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+		text-align: center;
+	}
+	.stat-card h3 {
+		font-size: 2rem;
+		margin: 8px 0;
+		color: #ff5722;
+	}
+	.stat-card p {
+		color: #666;
+		margin: 0;
+	}
+	.portal-section {
+		background: white;
+		padding: 24px;
+		border-radius: 12px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+		margin-bottom: 24px;
+	}
+	.portal-section h2 {
+		margin-bottom: 20px;
+		color: #333;
+	}
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	.table th,
+	.table td {
+		padding: 12px;
+		text-align: left;
+		border-bottom: 1px solid #eee;
+	}
+	.table th {
+		background: #f5f5f5;
+		font-weight: 600;
+	}
+	.menu-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 16px;
+	}
+	.menu-item-card {
+		border: 1px solid #eee;
+		border-radius: 8px;
+		padding: 16px;
+		text-align: center;
+	}
+	.menu-item-card img {
+		max-width: 100%;
+		height: 150px;
+		object-fit: cover;
+		border-radius: 4px;
+		margin-bottom: 12px;
+	}
+	.btn {
+		padding: 8px 16px;
+		border-radius: 6px;
+		border: none;
+		cursor: pointer;
+		font-weight: 500;
+	}
+	.btn-primary {
+		background: #ff5722;
+		color: white;
+	}
+	.btn-primary:hover {
+		background: #f4511e;
+	}
+	.btn-secondary {
+		background: #f5f5f5;
+		color: #333;
+	}
+	.btn-secondary:hover {
+		background: #e0e0e0;
+	}
+	.order-form {
+		background: #f9f9f9;
+		padding: 20px;
+		border-radius: 8px;
+		margin-bottom: 24px;
+	}
+	.form-group {
+		margin-bottom: 16px;
+	}
+	.form-group label {
+		display: block;
+		margin-bottom: 8px;
+		font-weight: 500;
+	}
+	.form-group input,
+	.form-group select,
+	.form-group textarea {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="customer-portal">
+	<div class="portal-header">
+		<h1>{{ _("Restaurant Customer Portal") }}</h1>
+		<p>{{ _("Welcome") }}{% if context.customer %}, {{ context.customer.customer_name }}{% endif %}</p>
+	</div>
+
+	<div class="portal-stats">
+		<div class="stat-card">
+			<h3>{{ context.stats.total_orders or 0 }}</h3>
+			<p>{{ _("Total Orders") }}</p>
+		</div>
+		<div class="stat-card">
+			<h3>{{ context.stats.pending_orders or 0 }}</h3>
+			<p>{{ _("Pending Orders") }}</p>
+		</div>
+		<div class="stat-card">
+			<h3>{{ context.stats.completed_orders or 0 }}</h3>
+			<p>{{ _("Completed Orders") }}</p>
+		</div>
+		<div class="stat-card">
+			<h3>{{ context.stats.total_invoices or 0 }}</h3>
+			<p>{{ _("Total Invoices") }}</p>
+		</div>
+	</div>
+
+	<div class="portal-section">
+		<h2>{{ _("Create New Order") }}</h2>
+		<div class="order-form">
+			<div class="form-group">
+				<label>{{ _("Select Menu Item") }}</label>
+				<select id="menu-item-select">
+					<option value="">{{ _("Choose a menu item") }}</option>
+					{% for item in context.menu_items %}
+					<option value="{{ item.item_code }}">{{ item.item_name }} - {{ item.price }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group">
+				<label>{{ _("Quantity") }}</label>
+				<input type="number" id="quantity" min="1" value="1">
+			</div>
+			<div class="form-group">
+				<label>{{ _("Delivery Address") }}</label>
+				<textarea id="delivery-address" rows="3"></textarea>
+			</div>
+			<button class="btn btn-primary" onclick="addToOrder()">{{ _("Add to Order") }}</button>
+		</div>
+		<div id="order-items"></div>
+		<button class="btn btn-primary" onclick="submitOrder()">{{ _("Submit Order") }}</button>
+	</div>
+
+	<div class="portal-section">
+		<h2>{{ _("Menu Items") }}</h2>
+		<div class="menu-grid">
+			{% for item in context.menu_items %}
+			<div class="menu-item-card">
+				{% if item.image %}
+				<img src="{{ item.image }}" alt="{{ item.item_name }}">
+				{% endif %}
+				<h3>{{ item.item_name }}</h3>
+				<p>{{ _("Category") }}: {{ item.category }}</p>
+				<p>{{ _("Price") }}: {{ item.price }}</p>
+				<button class="btn btn-primary" onclick="addMenuItemToOrder('{{ item.item_code }}')">{{ _("Add to Order") }}</button>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="portal-section">
+		<h2>{{ _("Recent Orders") }}</h2>
+		{% if context.orders %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{{ _("Order ID") }}</th>
+					<th>{{ _("Order Date") }}</th>
+					<th>{{ _("Total") }}</th>
+					<th>{{ _("Status") }}</th>
+					<th>{{ _("Delivery Time") }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for order in context.orders %}
+				<tr>
+					<td>{{ order.name }}</td>
+					<td>{{ order.order_date }}</td>
+					<td>{{ order.grand_total }}</td>
+					<td>{{ order.status }}</td>
+					<td>{{ order.delivery_time }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>{{ _("No orders found") }}</p>
+		{% endif %}
+	</div>
+
+	<div class="portal-section">
+		<h2>{{ _("Recent Invoices") }}</h2>
+		{% if context.invoices %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{{ _("Invoice ID") }}</th>
+					<th>{{ _("Date") }}</th>
+					<th>{{ _("Total") }}</th>
+					<th>{{ _("Outstanding") }}</th>
+					<th>{{ _("Status") }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for invoice in context.invoices %}
+				<tr>
+					<td>{{ invoice.name }}</td>
+					<td>{{ invoice.posting_date }}</td>
+					<td>{{ invoice.grand_total }}</td>
+					<td>{{ invoice.outstanding_amount }}</td>
+					<td>{{ invoice.status }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>{{ _("No invoices found") }}</p>
+		{% endif %}
+	</div>
+</div>
+
+<script>
+	let orderItems = [];
+
+	function addToOrder() {
+		const menuItemSelect = document.getElementById('menu-item-select');
+		const quantity = document.getElementById('quantity').value;
+		
+		if (menuItemSelect.value && quantity > 0) {
+			orderItems.push({
+				item_code: menuItemSelect.value,
+				qty: parseInt(quantity)
+			});
+			updateOrderItemsDisplay();
+		}
+	}
+
+	function addMenuItemToOrder(itemCode) {
+		const quantity = prompt("Enter quantity:", "1");
+		if (quantity && parseInt(quantity) > 0) {
+			orderItems.push({
+				item_code: itemCode,
+				qty: parseInt(quantity)
+			});
+			updateOrderItemsDisplay();
+		}
+	}
+
+	function updateOrderItemsDisplay() {
+		const container = document.getElementById('order-items');
+		container.innerHTML = '<h3>Order Items:</h3>';
+		orderItems.forEach((item, index) => {
+			container.innerHTML += `<p>${item.item_code} - Qty: ${item.qty} <button onclick="removeItem(${index})">Remove</button></p>`;
+		});
+	}
+
+	function removeItem(index) {
+		orderItems.splice(index, 1);
+		updateOrderItemsDisplay();
+	}
+
+	function submitOrder() {
+		if (orderItems.length === 0) {
+			alert("Please add items to your order");
+			return;
+		}
+
+		const deliveryAddress = document.getElementById('delivery-address').value;
+		if (!deliveryAddress) {
+			alert("Please enter delivery address");
+			return;
+		}
+
+		frappe.call({
+			method: "omnexa_restaurant.omnexa_restaurant.page.restaurant_customer_portal.restaurant_customer_portal.create_order",
+			args: {
+				items_data: orderItems,
+				delivery_address: deliveryAddress
+			},
+			callback: function(r) {
+				if (r.message.success) {
+					alert("Order created successfully: " + r.message.order);
+					orderItems = [];
+					updateOrderItemsDisplay();
+					location.reload();
+				} else {
+					alert("Error: " + r.message.message);
+				}
+			}
+		});
+	}
+</script>
+{% endblock %}

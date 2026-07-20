@@ -26,20 +26,30 @@ def get_site_config() -> dict:
 		"accent_color": "#00bcd4",
 		"gold_color": "#ffc107",
 		"menu": [
-			{"key": "appetizers", "name_ar": "مقبلات", "name_en": "Appetizers", "icon": "🥗", "desc": "Fresh starters"},
-			{"key": "mains", "name_ar": "أطباق رئيسية", "name_en": "Main Courses", "icon": "🍽️", "desc": "Signature dishes"},
-			{"key": "desserts", "name_ar": "حلويات", "name_en": "Desserts", "icon": "🍰", "desc": "Sweet treats"},
-			{"key": "drinks", "name_ar": "مشروبات", "name_en": "Beverages", "icon": "🍹", "desc": "Refreshing drinks"},
+			{"key": "appetizers", "name_ar": "مقبلات", "name_en": "Appetizers", "icon": "🥗", "desc": "Fresh starters"
+	},
+			{"key": "mains", "name_ar": "أطباق رئيسية", "name_en": "Main Courses", "icon": "🍽️", "desc": "Signature dishes"
+	},
+			{"key": "desserts", "name_ar": "حلويات", "name_en": "Desserts", "icon": "🍰", "desc": "Sweet treats"
+	},
+			{"key": "drinks", "name_ar": "مشروبات", "name_en": "Beverages", "icon": "🍹", "desc": "Refreshing drinks"
+	},
 		],
 		"services": [
-			{"icon": "📱", "ar": "طلب أونلاين", "en": "Online Ordering"},
-			{"icon": "🚗", "ar": "توصيل للمنزل", "en": "Home Delivery"},
-			{"icon": "🪑", "ar": "حجز طاولات", "en": "Table Reservation"},
-			{"icon": "🎉", "ar": "مناسبات خاصة", "en": "Private Events"},
-			{"icon": "👨‍🍳", "ar": "طهاة محترفون", "en": "Professional Chefs"},
-			{"icon": "🌿", "ar": "مكونات طازجة", "en": "Fresh Ingredients"},
+			{"icon": "📱", "ar": "طلب أونلاين", "en": "Online Ordering"
+	},
+			{"icon": "🚗", "ar": "توصيل للمنزل", "en": "Home Delivery"
+	},
+			{"icon": "🪑", "ar": "حجز طاولات", "en": "Table Reservation"
+	},
+			{"icon": "🎉", "ar": "مناسبات خاصة", "en": "Private Events"
+	},
+			{"icon": "👨‍🍳", "ar": "طهاة محترفون", "en": "Professional Chefs"
+	},
+			{"icon": "🌿", "ar": "مكونات طازجة", "en": "Fresh Ingredients"
+	},
 		],
-		"stats": {"dishes": 150, "customers": 10000, "locations": 5, "years": 10},
+		"stats": {"dishes": 150, "customers": 10000, "locations": 5, "years": 10}
 	}
 
 
@@ -56,7 +66,8 @@ def assign_delivery_driver(order_name: str, driver: str, eta_mins: int | str = 3
 	driver_doc = frappe.get_doc("Delivery Driver", driver)
 	driver_doc.status = "On Delivery"
 	driver_doc.save(ignore_permissions=True)
-	return {"order": order.name, "delivery_driver": order.delivery_driver, "delivery_status": order.delivery_status}
+	return {"order": order.name, "delivery_driver": order.delivery_driver, "delivery_status": order.delivery_status
+	}
 
 
 @frappe.whitelist()
@@ -66,7 +77,8 @@ def toggle_hold_order(order_name: str):
 	if order.hold_order and order.status == "In Progress":
 		order.status = "Draft"
 	order.save(ignore_permissions=True)
-	return {"order": order.name, "hold_order": order.hold_order, "status": order.status}
+	return {"order": order.name, "hold_order": order.hold_order, "status": order.status
+	}
 
 
 @frappe.whitelist()
@@ -85,8 +97,8 @@ def generate_kitchen_tickets(order_name: str):
 					"item_name": line.get("item_name"),
 					"quantity": line["quantity"],
 					"modifiers": row.modifiers,
-					"notes": row.notes,
-				}
+					"notes": row.notes
+	}
 			)
 
 	tickets = []
@@ -103,14 +115,15 @@ def generate_kitchen_tickets(order_name: str):
 				"order_number": order.name,
 				"order_type": order.order_type,
 				"table": order.table,
-				"items": items,
-			}
+				"items": items
+	}
 		)
 		ticket.company = order.company
 		ticket.branch = order.branch
 		ticket.insert(ignore_permissions=True)
 		tickets.append(ticket.name)
-	return {"order": order.name, "tickets": tickets}
+	return {"order": order.name, "tickets": tickets
+	}
 
 
 @frappe.whitelist()
@@ -121,7 +134,8 @@ def kpi_active_orders():
 
 @frappe.whitelist()
 def kpi_occupied_tables():
-	value = frappe.db.count("Restaurant Table", {"status": "Occupied"})
+	value = frappe.db.count("Restaurant Table", {"status": "Occupied"
+	})
 	return {"value": cint(value), "fieldtype": "Int", "route": ["List", "Restaurant Table"]}
 
 
@@ -176,7 +190,8 @@ def transfer_order(order_name: str, new_table: str):
 	order = _get_editable_order(order_name)
 	order.table = new_table
 	order.save(ignore_permissions=True)
-	return {"order": order.name, "table": order.table}
+	return {"order": order.name, "table": order.table
+	}
 
 
 @frappe.whitelist()
@@ -197,8 +212,8 @@ def split_bill(order_name: str, item_row_names_json: str | None = None):
 			"price": row.price,
 			"cost": row.cost,
 			"modifiers": row.modifiers,
-			"notes": row.notes,
-		}
+			"notes": row.notes
+	}
 		if row.name in item_row_names:
 			new_order.append("items", row_payload)
 		else:
@@ -215,7 +230,8 @@ def split_bill(order_name: str, item_row_names_json: str | None = None):
 	order.save(ignore_permissions=True)
 	new_order.insert(ignore_permissions=True)
 
-	return {"source_order": order.name, "new_order": new_order.name}
+	return {"source_order": order.name, "new_order": new_order.name
+	}
 
 
 @frappe.whitelist()
@@ -236,14 +252,15 @@ def merge_tables(primary_order_name: str, secondary_order_name: str):
 				"price": row.price,
 				"cost": row.cost,
 				"modifiers": row.modifiers,
-				"notes": row.notes,
-			},
+				"notes": row.notes
+	},
 		)
 	primary_order.save(ignore_permissions=True)
 	secondary_order.status = "Closed"
 	secondary_order.items = []
 	secondary_order.save(ignore_permissions=True)
-	return {"primary_order": primary_order.name, "merged_order": secondary_order.name}
+	return {"primary_order": primary_order.name, "merged_order": secondary_order.name
+	}
 
 
 @frappe.whitelist()
@@ -258,9 +275,11 @@ def update_kitchen_ticket_status(ticket_name: str, status: str):
 	ticket.save(ignore_permissions=True)
 	frappe.publish_realtime(
 		"restaurant_kds_update",
-		{"ticket": ticket.name, "status": ticket.ticket_status, "order": ticket.restaurant_order},
+		{"ticket": ticket.name, "status": ticket.ticket_status, "order": ticket.restaurant_order
+	},
 	)
-	return {"ticket": ticket.name, "status": ticket.ticket_status}
+	return {"ticket": ticket.name, "status": ticket.ticket_status
+	}
 
 
 def _menu_item_label(menu_item: str) -> str:
@@ -276,7 +295,8 @@ def _order_financials(order) -> dict[str, float]:
 	subtotal = flt(order.total_amount)
 	vat = flt(subtotal * VAT_RATE, 2)
 	grand_total = flt(subtotal + vat, 2)
-	return {"subtotal": subtotal, "vat": vat, "vat_rate": VAT_RATE, "grand_total": grand_total}
+	return {"subtotal": subtotal, "vat": vat, "vat_rate": VAT_RATE, "grand_total": grand_total
+	}
 
 
 @frappe.whitelist()
@@ -291,8 +311,8 @@ def get_pos_order_detail(order_name: str):
 				"item_name": _menu_item_label(row.menu_item),
 				"quantity": flt(row.quantity),
 				"price": flt(row.price),
-				"line_amount": flt(row.line_amount),
-			}
+				"line_amount": flt(row.line_amount)
+	}
 		)
 	fin = _order_financials(order)
 	return {
@@ -302,8 +322,7 @@ def get_pos_order_detail(order_name: str):
 		"items_count": len(items),
 		"status": order.status,
 		"cashier": get_fullname(order.owner),
-		**fin,
-	}
+		**fin}
 
 
 @frappe.whitelist()
@@ -334,7 +353,7 @@ def complete_pos_order(order_name: str, customer: str | None = None):
 		"order": order.name,
 		"sales_invoice": invoice_result.get("sales_invoice"),
 		"einvoice": invoice_result.get("einvoice"),
-		"receipt_html": get_customer_receipt_html(order_name),
+		"receipt_html": get_customer_receipt_html(order_name)
 	}
 
 
@@ -367,8 +386,8 @@ def get_customer_receipt_html(order_name: str):
 				"name": _menu_item_label(row.menu_item),
 				"qty": flt(row.quantity),
 				"price": flt(row.price),
-				"total": flt(row.line_amount),
-			}
+				"total": flt(row.line_amount)
+	}
 		)
 	fin = _order_financials(order)
 	if order.sales_invoice and frappe.db.exists("Sales Invoice", order.sales_invoice):
@@ -377,8 +396,8 @@ def get_customer_receipt_html(order_name: str):
 			"subtotal": flt(si.net_total),
 			"vat": flt(si.total_taxes_and_charges),
 			"vat_rate": VAT_RATE,
-			"grand_total": flt(si.grand_total),
-		}
+			"grand_total": flt(si.grand_total)
+	}
 	from omnexa_restaurant.pos_invoicing import get_einvoice_receipt_context
 
 	einv = get_einvoice_receipt_context(order_name)
@@ -396,8 +415,7 @@ def get_customer_receipt_html(order_name: str):
 		"einvoice_uuid": einv.get("uuid") or "",
 		"qr_image_base64": einv.get("qr_image_base64") or "",
 		"items": items,
-		**fin,
-	}
+		**fin}
 	return frappe.render_template(
 		"omnexa_restaurant/templates/thermal_receipt.html",
 		context,
@@ -427,7 +445,8 @@ def get_kds_board(station: str | None = None):
 		order_by="modified asc",
 		limit_page_length=200,
 	)
-	board = {"Pending": [], "Preparing": [], "Ready": [], "Delivered": []}
+	board = {"Pending": [], "Preparing": [], "Ready": [], "Delivered": []
+	}
 	now = now_datetime()
 	for ticket in tickets:
 		payload = frappe.parse_json(ticket.ticket_payload or "{}")
@@ -437,8 +456,8 @@ def get_kds_board(station: str | None = None):
 				{
 					"name": _menu_item_label(item.get("menu_item")),
 					"quantity": flt(item.get("quantity")),
-					"notes": item.get("notes") or "",
-				}
+					"notes": item.get("notes") or ""
+	}
 			)
 		created = ticket.creation
 		elapsed_secs = int((now - created).total_seconds()) if created else 0
@@ -451,10 +470,11 @@ def get_kds_board(station: str | None = None):
 			"kitchen_station": ticket.kitchen_station,
 			"items": items,
 			"time_label": frappe.utils.format_time(created, "HH:mm") if created else "",
-			"elapsed_mmss": f"{elapsed_secs // 60:02d}:{elapsed_secs % 60:02d}",
+			"elapsed_mmss": f"{elapsed_secs // 60:02d}:{elapsed_secs % 60:02d
+	}",
 			"elapsed_seconds": elapsed_secs,
-			"cashier": get_fullname(order_owner or ticket.owner),
-		}
+			"cashier": get_fullname(order_owner or ticket.owner)
+	}
 		status_key = ticket.ticket_status
 		if status_key == "Printed":
 			status_key = "Delivered"
@@ -475,26 +495,30 @@ def get_open_pos_orders():
 
 @frappe.whitelist()
 def get_pos_catalog():
-	from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, serialize_menu_item
+	from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, menu_item_has_field, serialize_menu_item
 
+	filters = {"is_active": 1}
+	fields = [
+		"name",
+		"item_code",
+		"item_name",
+		"category",
+		"menu_category",
+		"default_price",
+		"image",
+		"description",
+		"kitchen_station",
+		"erp_item",
+		"classification_code",
+		"is_manufactured",
+	]
+	if menu_item_has_field("item_type"):
+		filters["item_type"] = ["in", list(POS_ITEM_TYPES)]
+		fields.insert(3, "item_type")
 	items = frappe.get_all(
 		"Menu Item",
-		filters={"is_active": 1, "item_type": ["in", list(POS_ITEM_TYPES)]},
-		fields=[
-			"name",
-			"item_code",
-			"item_name",
-			"item_type",
-			"category",
-			"menu_category",
-			"default_price",
-			"image",
-			"description",
-			"kitchen_station",
-			"erp_item",
-			"classification_code",
-			"is_manufactured",
-		],
+		filters=filters,
+		fields=fields,
 		order_by="category asc, item_name asc",
 		limit_page_length=1000,
 	)
@@ -505,7 +529,8 @@ def get_pos_catalog():
 		category = serialized["category"] or "General"
 		category_map.setdefault(category, [])
 		category_map[category].append(serialized)
-	return {"categories": sorted(category_map.keys()), "items_by_category": category_map, "offers_count": len(offers)}
+	return {"categories": sorted(category_map.keys()), "items_by_category": category_map, "offers_count": len(offers)
+	}
 
 
 @frappe.whitelist()
@@ -518,19 +543,22 @@ def create_pos_order(order_type: str = "Dine-in", table: str | None = None, cust
 	order.branch = frappe.defaults.get_user_default("Branch")
 	order.status = "Draft"
 	order.insert(ignore_permissions=True)
-	return {"order_name": order.name}
+	return {"order_name": order.name
+	}
 
 
 @frappe.whitelist()
 def add_item_to_order(order_name: str, menu_item: str, qty: float | int = 1):
 	from omnexa_restaurant.pos_invoicing import line_cost_for_menu_item, line_price_for_menu_item
+	from omnexa_restaurant.pos_catalog import menu_item_has_field
 
 	order = _get_editable_order(order_name)
 	qty = flt(qty or 1)
 	if qty <= 0:
 		frappe.throw(_("Quantity must be greater than zero."))
 
-	item_type = frappe.db.get_value("Menu Item", menu_item, "item_type") or "Product"
+	item_type = frappe.db.get_value("Menu Item", menu_item, "item_type") if menu_item_has_field("item_type") else "Product"
+	item_type = item_type or "Product"
 	if item_type == "Raw Material":
 		frappe.throw(_("Raw materials cannot be sold from POS."))
 
@@ -546,10 +574,12 @@ def add_item_to_order(order_name: str, menu_item: str, qty: float | int = 1):
 		existing.price = price
 		existing.cost = cost
 	else:
-		order.append("items", {"menu_item": menu_item, "quantity": qty, "price": price, "cost": cost})
+		order.append("items", {"menu_item": menu_item, "quantity": qty, "price": price, "cost": cost
+	})
 	order.status = "In Progress" if order.status == "Draft" else order.status
 	order.save(ignore_permissions=True)
-	return {"order": order.name, "items_count": len(order.items), "total_amount": order.total_amount}
+	return {"order": order.name, "items_count": len(order.items), "total_amount": order.total_amount
+	}
 
 
 @frappe.whitelist()
@@ -568,7 +598,8 @@ def get_kitchen_tickets(station: str | None = None):
 
 @frappe.whitelist()
 def get_table_map(floor: str | None = None):
-	filters = {"is_active": 1}
+	filters = {"is_active": 1
+	}
 	if floor:
 		filters["name"] = floor
 	floors = frappe.get_all("Restaurant Floor", filters=filters, fields=["name", "floor_name"], order_by="floor_name asc")
@@ -582,13 +613,15 @@ def get_table_map(floor: str | None = None):
 	for row in tables:
 		table_map.setdefault(row.floor, [])
 		table_map[row.floor].append(row)
-	return {"floors": floors, "tables_by_floor": table_map}
+	return {"floors": floors, "tables_by_floor": table_map
+	}
 
 
 @frappe.whitelist()
 def get_order_items(order_name: str):
 	order = frappe.get_doc("Restaurant Order", order_name)
-	return [{"row_name": r.name, "menu_item": r.menu_item, "quantity": r.quantity, "line_amount": r.line_amount} for r in order.items]
+	return [{"row_name": r.name, "menu_item": r.menu_item, "quantity": r.quantity, "line_amount": r.line_amount
+	} for r in order.items]
 
 
 @frappe.whitelist()
@@ -623,13 +656,14 @@ def split_bill_by_quantity(order_name: str, row_name: str, quantity: float | int
 			"price": target_row.price,
 			"cost": target_row.cost,
 			"modifiers": target_row.modifiers,
-			"notes": target_row.notes,
-		},
+			"notes": target_row.notes
+	},
 	)
 	target_row.quantity = flt(target_row.quantity) - qty
 	order.save(ignore_permissions=True)
 	new_order.insert(ignore_permissions=True)
-	return {"source_order": order.name, "new_order": new_order.name, "split_quantity": qty}
+	return {"source_order": order.name, "new_order": new_order.name, "split_quantity": qty
+	}
 
 
 @frappe.whitelist()
@@ -641,7 +675,8 @@ def get_kot_print_preview(ticket_name: str):
 
 	template_text = frappe.db.get_value(
 		"Kitchen Print Template",
-		{"kitchen_station": ticket.kitchen_station, "company": ticket.company, "branch": ticket.branch, "is_active": 1},
+		{"kitchen_station": ticket.kitchen_station, "company": ticket.company, "branch": ticket.branch, "is_active": 1
+	},
 		"template_text",
 	)
 	if not template_text:
@@ -659,7 +694,8 @@ def get_kot_print_preview(ticket_name: str):
 		station=ticket.kitchen_station or "-",
 		items=items_text,
 	)
-	return {"ticket": ticket.name, "preview": text}
+	return {"ticket": ticket.name, "preview": text
+	}
 
 
 @frappe.whitelist()
@@ -677,8 +713,10 @@ def send_kot_to_printer(ticket_name: str):
 	job.insert(ignore_permissions=True)
 	ticket.ticket_status = "Printed"
 	ticket.save(ignore_permissions=True)
-	frappe.publish_realtime("restaurant_kds_update", {"ticket": ticket.name, "status": "Printed", "order": ticket.restaurant_order})
-	return {"ticket": ticket.name, "print_job": job.name, "status": "Printed"}
+	frappe.publish_realtime("restaurant_kds_update", {"ticket": ticket.name, "status": "Printed", "order": ticket.restaurant_order
+	})
+	return {"ticket": ticket.name, "print_job": job.name, "status": "Printed"
+	}
 
 @frappe.whitelist()
 def preview_sector_kpi(scenario: str | None = None, params: str | None = None) -> dict:
@@ -686,4 +724,3 @@ def preview_sector_kpi(scenario: str | None = None, params: str | None = None) -
 	from omnexa_core.omnexa_core.vertical_api import preview_sector_kpi as _core_preview
 
 	return _core_preview("restaurant", scenario=scenario, params=params)
-

@@ -16,7 +16,7 @@ add_to_apps_screen = [
 		"name": "omnexa_restaurant",
 		"logo": "/assets/omnexa_restaurant/logo.png",
 		"title": "Restaurant",
-		"route": "/app/restaurant",
+		"route": "/app/restaurant"
 	}
 ]
 
@@ -131,8 +131,8 @@ permission_query_conditions = {
 	"Delivery Driver": "omnexa_restaurant.permissions.delivery_driver_query_conditions",
 	"Kitchen Ticket": "omnexa_restaurant.permissions.kitchen_ticket_query_conditions",
 	"Kitchen Print Template": "omnexa_restaurant.permissions.kitchen_print_template_query_conditions",
-	"Kitchen Print Job": "omnexa_restaurant.permissions.kitchen_print_job_query_conditions",
-}
+	"Kitchen Print Job": "omnexa_restaurant.permissions.kitchen_print_job_query_conditions"
+	}
 #
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
@@ -153,67 +153,67 @@ permission_query_conditions = {
 doc_events = {
 	"Restaurant Floor": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Restaurant Table": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Kitchen Station": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Kitchen Printer": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Menu Item": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Menu Category": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Restaurant Offer": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Restaurant Recipe": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Restaurant Order": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Delivery Zone": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Waste Log": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Delivery Driver": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Kitchen Ticket": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Kitchen Print Template": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"
 	},
 	"Kitchen Print Job": {
 		"before_validate": "omnexa_restaurant.permissions.populate_company_branch_from_user_context",
-		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc",
-	},
-}
+		"validate": "omnexa_restaurant.permissions.enforce_branch_access_for_doc"}
+	}
 
-doctype_js = {"Restaurant Order": "public/js/restaurant_order.js"}
+doctype_js = {"Restaurant Order": "public/js/restaurant_order.js"
+	}
 
 # Scheduled Tasks
 # ---------------
@@ -279,22 +279,22 @@ doctype_js = {"Restaurant Order": "public/js/restaurant_order.js"}
 
 # user_data_fields = [
 # 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
+# 		"doctype": "{}",
+# 		"filter_by": "{}",
+# 		"redact_fields": ["{}", "{}"],
 # 		"partial": 1,
 # 	},
 # 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
+# 		"doctype": "{}",
+# 		"filter_by": "{}",
 # 		"partial": 1,
 # 	},
 # 	{
-# 		"doctype": "{doctype_3}",
+# 		"doctype": "{}",
 # 		"strict": False,
 # 	},
 # 	{
-# 		"doctype": "{doctype_4}"
+# 		"doctype": "{}"
 # 	}
 # ]
 

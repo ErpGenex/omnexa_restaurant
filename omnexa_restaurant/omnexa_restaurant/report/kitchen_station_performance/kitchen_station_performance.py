@@ -17,9 +17,12 @@ from omnexa_core.omnexa_core.report_print.report_query_filters import (
 
 def execute(filters=None):
 	columns = [
-		{"label": _("Kitchen Station"), "fieldname": "kitchen_station", "fieldtype": "Link", "options": "Kitchen Station", "width": 180},
-		{"label": _("Orders"), "fieldname": "orders_count", "fieldtype": "Int", "width": 110},
-		{"label": _("Total Qty"), "fieldname": "total_qty", "fieldtype": "Float", "width": 110},
+		{"label": _("Kitchen Station"), "fieldname": "kitchen_station", "fieldtype": "Link", "options": "Kitchen Station", "width": 180
+	},
+		{"label": _("Orders"), "fieldname": "orders_count", "fieldtype": "Int", "width": 110
+	},
+		{"label": _("Total Qty"), "fieldname": "total_qty", "fieldtype": "Float", "width": 110
+	},
 	]
 	filters = prepare_filters(filters)
 	conditions, params = sql_conditions(filters, "Restaurant Order Item", date_field="creation", company=True, branch=True)

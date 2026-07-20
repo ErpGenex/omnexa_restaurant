@@ -28,8 +28,8 @@ add_to_apps_screen = [
 # app_include_js = "/assets/omnexa_restaurant/js/omnexa_restaurant.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/omnexa_restaurant/css/omnexa_restaurant.css"
-# web_include_js = "/assets/omnexa_restaurant/js/omnexa_restaurant.js"
+web_include_css = "/assets/omnexa_restaurant/css/restaurant_website.css"
+web_include_js = "/assets/omnexa_restaurant/js/restaurant_website.js"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "omnexa_restaurant/public/scss/website"

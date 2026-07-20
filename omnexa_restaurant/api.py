@@ -9,6 +9,41 @@ from frappe.utils import cint, flt, getdate, get_fullname, now_datetime, today
 VAT_RATE = 0.15
 
 
+@frappe.whitelist(allow_guest=True)
+def get_site_config() -> dict:
+	"""Public restaurant website configuration."""
+	return {
+		"brand_name_ar": "Omnexa Restaurant",
+		"brand_name_en": "Omnexa Restaurant",
+		"tagline_ar": "تجربة طعام استثنائية",
+		"tagline_en": "Exceptional dining experience",
+		"hero_text_ar": "من المقبلات إلى الحلويات — قائمة متنوعة لكل ذوق",
+		"hero_text_en": "From appetizers to desserts — a diverse menu for every taste",
+		"hero_image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=85",
+		"logo": "/assets/omnexa_restaurant/logo.png",
+		"primary_color": "#ff5722",
+		"secondary_color": "#e64a19",
+		"accent_color": "#00bcd4",
+		"gold_color": "#ffc107",
+		"menu": [
+			{"key": "appetizers", "name_ar": "مقبلات", "name_en": "Appetizers", "icon": "🥗", "desc": "Fresh starters"},
+			{"key": "mains", "name_ar": "أطباق رئيسية", "name_en": "Main Courses", "icon": "🍽️", "desc": "Signature dishes"},
+			{"key": "desserts", "name_ar": "حلويات", "name_en": "Desserts", "icon": "🍰", "desc": "Sweet treats"},
+			{"key": "drinks", "name_ar": "مشروبات", "name_en": "Beverages", "icon": "🍹", "desc": "Refreshing drinks"},
+		],
+		"services": [
+			{"icon": "📱", "ar": "طلب أونلاين", "en": "Online Ordering"},
+			{"icon": "🚗", "ar": "توصيل للمنزل", "en": "Home Delivery"},
+			{"icon": "🪑", "ar": "حجز طاولات", "en": "Table Reservation"},
+			{"icon": "🎉", "ar": "مناسبات خاصة", "en": "Private Events"},
+			{"icon": "👨‍🍳", "ar": "طهاة محترفون", "en": "Professional Chefs"},
+			{"icon": "🌿", "ar": "مكونات طازجة", "en": "Fresh Ingredients"},
+		],
+		"stats": {"dishes": 150, "customers": 10000, "locations": 5, "years": 10},
+	}
+
+
+
 @frappe.whitelist()
 def assign_delivery_driver(order_name: str, driver: str, eta_mins: int | str = 30):
 	order = frappe.get_doc("Restaurant Order", order_name)

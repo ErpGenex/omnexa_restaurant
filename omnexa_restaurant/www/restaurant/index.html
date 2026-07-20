@@ -1,0 +1,38 @@
+---
+no_breadcrumbs: 1
+full_width: 1
+no_header: 1
+---
+
+{% extends "templates/web.html" %}
+
+{% block head_include %}
+{{ super() }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% endblock %}
+
+{% block title %}Omnexa Restaurant | المطاعم{% endblock %}
+
+{% block page_content %}
+<div class="restaurant-site restaurant-premium" data-page="home">
+  <header class="restaurant-header" id="restaurant-header"></header>
+  <section class="restaurant-hero restaurant-hero-premium" id="restaurant-hero"></section>
+  <div class="restaurant-value-bar" id="restaurant-trust-strip"></div>
+  <section class="restaurant-section restaurant-reveal" id="restaurant-menu-section"></section>
+  <section class="restaurant-section restaurant-section-alt restaurant-reveal" id="restaurant-services-section"></section>
+  <section class="restaurant-stats restaurant-reveal" id="restaurant-stats"></section>
+  <section class="restaurant-cta-band restaurant-reveal" id="restaurant-cta-band"></section>
+  <footer class="restaurant-footer" id="restaurant-footer"></footer>
+</div>
+<script>
+  (function () {
+    function boot() {
+      if (window.RestaurantSite) window.RestaurantSite.init("home");
+    }
+    if (typeof frappe !== "undefined" && frappe.ready) frappe.ready(boot);
+    else if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+    else boot();
+  })();
+</script>
+{% endblock %}

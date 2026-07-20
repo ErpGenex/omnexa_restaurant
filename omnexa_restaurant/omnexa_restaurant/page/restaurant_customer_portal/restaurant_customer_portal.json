@@ -4,13 +4,19 @@
 	"name": "restaurant-customer-portal",
 	"page_name": "restaurant-customer-portal",
 	"standard": "Yes",
-	"title": "Customer Portal",
+	"title": "Restaurant Customer Portal",
 	"roles": [
 		{
 			"role": "System Manager"
 		},
 		{
-			"role": "Company Admin"
+			"role": "Restaurant Manager"
+		},
+		{
+			"role": "Restaurant User"
+		},
+		{
+			"role": "Restaurant Customer Portal"
 		}
 	]
 }

@@ -495,13 +495,20 @@ def get_open_pos_orders():
 
 @frappe.whitelist()
 def get_pos_catalog():
-	from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, menu_item_has_field, serialize_menu_item
+	from omnexa_restaurant.pos_catalog import (
+		POS_ITEM_TYPES,
+		get_active_offers,
+		menu_item_existing_fields,
+		menu_item_has_field,
+		serialize_menu_item,
+	)
 
 	filters = {"is_active": 1}
-	fields = [
+	fields = menu_item_existing_fields([
 		"name",
 		"item_code",
 		"item_name",
+		"item_type",
 		"category",
 		"menu_category",
 		"default_price",
@@ -511,15 +518,15 @@ def get_pos_catalog():
 		"erp_item",
 		"classification_code",
 		"is_manufactured",
-	]
+	])
 	if menu_item_has_field("item_type"):
 		filters["item_type"] = ["in", list(POS_ITEM_TYPES)]
-		fields.insert(3, "item_type")
+	order_by = "category asc, item_name asc" if menu_item_has_field("category") else "item_name asc"
 	items = frappe.get_all(
 		"Menu Item",
 		filters=filters,
 		fields=fields,
-		order_by="category asc, item_name asc",
+		order_by=order_by,
 		limit_page_length=1000,
 	)
 	offers = get_active_offers()

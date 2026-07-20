@@ -12,7 +12,13 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt
 
-from omnexa_restaurant.pos_catalog import POS_ITEM_TYPES, get_active_offers, menu_item_has_field, serialize_menu_item
+from omnexa_restaurant.pos_catalog import (
+	POS_ITEM_TYPES,
+	get_active_offers,
+	menu_item_existing_fields,
+	menu_item_has_field,
+	serialize_menu_item,
+)
 from omnexa_restaurant.pos_invoicing import ensure_erp_item_for_menu_item
 
 
@@ -56,10 +62,11 @@ def get_menu_items_for_manager(
 	has_item_type = menu_item_has_field("item_type")
 	if has_item_type and item_type and item_type != "All":
 		filters["item_type"] = item_type
-	fields = [
+	fields = menu_item_existing_fields([
 		"name",
 		"item_code",
 		"item_name",
+		"item_type",
 		"category",
 		"menu_category",
 		"default_price",
@@ -70,9 +77,7 @@ def get_menu_items_for_manager(
 		"kitchen_station",
 		"classification_code",
 		"is_manufactured",
-	]
-	if has_item_type:
-		fields.insert(3, "item_type")
+	])
 	rows = frappe.get_all(
 		"Menu Item",
 		filters=filters,

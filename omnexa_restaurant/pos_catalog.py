@@ -21,6 +21,10 @@ def menu_item_has_field(fieldname: str) -> bool:
 		return False
 
 
+def menu_item_existing_fields(fields: list[str]) -> list[str]:
+	return [field for field in fields if field == "name" or menu_item_has_field(field)]
+
+
 def get_menu_item_type(menu_item) -> str:
 	return getattr(menu_item, "item_type", None) or "Product"
 
@@ -53,6 +57,8 @@ def menu_item_unit_cost(menu_item_name: str) -> float:
 
 
 def get_active_offers(company: str | None = None, branch: str | None = None) -> list[dict[str, Any]]:
+	if not frappe.db.exists("DocType", "Restaurant Offer"):
+		return []
 	filters: dict[str, Any] = {"is_active": 1
 	}
 	if company:

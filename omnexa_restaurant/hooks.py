@@ -31,6 +31,11 @@ add_to_apps_screen = [
 web_include_css = "/assets/omnexa_restaurant/css/restaurant_website.css"
 web_include_js = "/assets/omnexa_restaurant/js/restaurant_website.js"
 
+# Public website routes
+website_route_rules = [
+	{"from_route": "/restaurant", "to_route": "restaurant/index"}
+]
+
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "omnexa_restaurant/public/scss/website"
 
